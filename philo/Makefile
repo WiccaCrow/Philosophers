@@ -3,7 +3,9 @@ NAME		=		philo
 CCF			=		gcc $(FLAGS)
 CFLAGS		=		-Wall -Wextra -Werror -g -I./
 
-SRCS		=		philo_main.c
+SRCS		=		philo_main.c philo_start_all.c \
+					philo_simulation.c \
+					functions.c
 OBJS		=		$(SRCS:.c=.o)
 %.o:		%.c $(HDR)
 			@$(CCF) -c $< -o $@
