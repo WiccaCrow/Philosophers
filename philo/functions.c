@@ -23,3 +23,13 @@ int	ft_atoi(const char *str)
 		return (sign == -1 ? 0 : -1);
 	return (sign == -1 ? n = -n : n);
 }
+
+int	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
