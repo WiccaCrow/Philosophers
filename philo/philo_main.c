@@ -3,13 +3,24 @@
 int main(int ac, char **av)
 {
 	t_all	all;
+	int		i;
 
 	if (valid_ac(ac, av))
 		return (2);
 	if (start_all(&all, av))
 		return (1);
-	if (simulation(&all))
-		return (1);
+	i = -1;
+	while (++i < all.data.nb_philo)
+	{
+printf("test 1\n");
+		all.philo[i].id = i + 1;
+		pthread_create(&all.data.ph[i], NULL, simulation, (void *)&all.philo[i]);//protect from error pthread!!!
+printf("test 2\n");
+	}
+	i = -1;
+	while (++i < all.data.nb_philo)
+		pthread_join(all.data.ph[i], NULL);
+	usleep(16000);
 	return (0);
 }
 

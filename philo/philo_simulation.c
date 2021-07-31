@@ -1,34 +1,36 @@
 #include "philo.h"
 
-void	put_fork(t_all *all)
+void	put_fork(t_philo *ph)
 {
-	if (all)
+	if (ph)
 		return ;
 }
 
-void	take_forks(t_all *all)
+void	take_forks(t_philo *ph)
 {
 	long int	time;
 
-	time = ft_gettime(all);
+	time = ft_gettime(ph);
 	if (time != -1)
 	{
-		print_status(all, time, 1, MESS_FORK);
-		ft_died(all);
+		print_status(ph, time, MESS_FORK);
 	}
 }
 
-void	eat_or_died(t_all *all)
+void	eat_or_died(t_philo *ph)
 {
-	take_forks(all);
-	ft_eat(all);
-	put_fork(all);
+	take_forks(ph);
+	ft_eat(ph);
+	put_fork(ph);
 }
 
-int	simulation(t_all *all)
+void	*simulation(void *ph)
 {
-	ft_think(all);
-	ft_sleep(all);
-	eat_or_died(all);
+	((t_philo *)ph)->eat_end_time = ft_gettime((t_philo *)ph);
+	// while (0 == ((t_philo *)ph)->died)
+		if (-1 == ft_think((t_philo *)ph))
+			return (0);
+		ft_sleep((t_philo *)ph);
+		eat_or_died((t_philo *)ph);
 	return (0);
 }
