@@ -1,23 +1,34 @@
 #include "philo.h"
 
-int	simulation(t_all *all)
+void	put_fork(t_all *all)
 {
-	// ◦ timestamp_in_ms X has taken a fork
-	// ◦ timestamp_in_ms X is eating
-	// ◦ timestamp_in_ms X is sleeping
-	// ◦ timestamp_in_ms X is thinking
-	// ◦ timestamp_in_ms X died
-	print_status(all, 1, MESS_EAT);
-
-	return (0);
+	if (all)
+		return ;
 }
 
-void	print_status(t_all *all, int nb_philo, char *message)
+void	take_forks(t_all *all)
 {
-	int	i;
+	long int	time;
 
-	i = nb_philo % 6;
-	write(STDOUT_FILENO, all->colors[i], ft_strlen(all->colors[i]));
-	write(STDOUT_FILENO, message, ft_strlen(message));
-	write(STDOUT_FILENO, all->colors[6], ft_strlen(all->colors[6]));
+	time = ft_gettime(all);
+	if (time != -1)
+	{
+		print_status(all, time, 1, MESS_FORK);
+		ft_died(all);
+	}
+}
+
+void	eat_or_died(t_all *all)
+{
+	take_forks(all);
+	ft_eat(all);
+	put_fork(all);
+}
+
+int	simulation(t_all *all)
+{
+	ft_think(all);
+	ft_sleep(all);
+	eat_or_died(all);
+	return (0);
 }

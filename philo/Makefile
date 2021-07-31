@@ -4,7 +4,7 @@ CCF			=		gcc $(FLAGS)
 CFLAGS		=		-Wall -Wextra -Werror -g -I./
 
 SRCS		=		philo_main.c philo_start_all.c \
-					philo_simulation.c \
+					philo_simulation.c philo_print_status.c\
 					functions.c
 OBJS		=		$(SRCS:.c=.o)
 %.o:		%.c $(HDR)

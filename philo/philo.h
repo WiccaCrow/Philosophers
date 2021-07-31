@@ -5,6 +5,7 @@
 # include<stdio.h>
 # include<stdlib.h>
 # include<string.h>
+# include<sys/time.h>
 
 # define MESS_FORK " has taken a fork\n"
 # define MESS_EAT " is eating\n"
@@ -23,12 +24,14 @@
 
 typedef struct	s_all
 {
-    int	nb_philo;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	time_stop_eat;
-	char	**colors;
+	int				comp_code;
+    int				nb_philo;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				time_stop_eat;
+	char			**colors;
+	struct timeval	tv;
 }				t_all;
 
 int		ft_atoi(const char *str);
@@ -37,6 +40,12 @@ int		ft_strlen(const char *s);
 int		valid_ac(int ac, char **av);
 int		start_all(t_all *all, char **av);
 int		simulation(t_all *all);
-void	print_status(t_all *all, int nb_philo, char *message);
+
+long int	ft_gettime(t_all *all);
+void		ft_think(t_all *all);
+void		ft_sleep(t_all *all);
+void		ft_eat(t_all *all);
+void		ft_died(t_all *all);
+void		print_status(t_all *all, long int timestap_in_ms, int nb_philo, char *message);
 
 #endif
