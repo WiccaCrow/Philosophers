@@ -10,7 +10,6 @@
 int	start_all(t_all *all, char **av)
 {
 	memset(all, 0, sizeof(t_all));
-	memset(&all->data, 0, sizeof(t_data));
 	all->data.nb_philo = ft_atoi(av[1]);
 	if (all->data.nb_philo == 0)
 	{

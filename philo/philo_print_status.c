@@ -67,6 +67,6 @@ void	print_status(t_philo *ph, long int timestap_in_ms, char *message)
 	int	i;
 
 	i = ph->id % 6;
-	printf("%ld %d%s\n", timestap_in_ms, ph->id, message);
-	// printf("%s%ld %d%s%s", ph->d->colors[i], timestap_in_ms, ph->id, message, ph->d->colors[6]);
+	// printf("%ld %d%s\n", timestap_in_ms, ph->id, message);
+	printf("%s%ld %d%s%s", ph->d->colors[i], timestap_in_ms, ph->id, message, ph->d->colors[6]);
 }
