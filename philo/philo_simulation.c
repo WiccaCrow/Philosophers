@@ -27,10 +27,14 @@ void	eat_or_died(t_philo *ph)
 void	*simulation(void *ph)
 {
 	((t_philo *)ph)->eat_end_time = ft_gettime((t_philo *)ph);
-	// while (0 == ((t_philo *)ph)->died)
-		if (-1 == ft_think((t_philo *)ph))
-			return (0);
-		ft_sleep((t_philo *)ph);
+	while (0 == ((t_philo *)ph)->died)
+	{
 		eat_or_died((t_philo *)ph);
+		if (0 == ((t_philo *)ph)->died) 
+		{
+			ft_sleep((t_philo *)ph);
+			ft_think((t_philo *)ph);
+		}
+	}
 	return (0);
 }

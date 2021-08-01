@@ -21,7 +21,7 @@
 # define ANSI_COLOR_BLUE    "\x1b[34m"
 # define ANSI_COLOR_MAGENTA "\x1b[35m"
 # define ANSI_COLOR_CYAN    "\x1b[36m"
-# define ANSI_COLOR_RESET   "\x1b[0m\n"
+# define ANSI_COLOR_RESET   "\x1b[0m"
 
 typedef struct	s_data
 {
@@ -54,6 +54,7 @@ typedef struct	s_all
 
 int		ft_atoi(const char *str);
 int		ft_strlen(const char *s);
+char	*ft_itoa(long int n);
 void	exit_clean(t_all *all);
 
 int			valid_ac(int ac, char **av);

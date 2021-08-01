@@ -1,12 +1,5 @@
 #include "philo.h"
 
-// void	exit_clean(t_all *all)
-// {
-// 	if (all->i_philo)
-// 		free(all->i_philo);
-// 	all->i_philo = NULL;
-// }
-
 int	start_all(t_all *all, char **av)
 {
 	memset(all, 0, sizeof(t_all));
