@@ -9,12 +9,13 @@ int main(int ac, char **av)
 		return (2);
 	if (start_all(&all, av))
 		return (1);
-	i = -1;
-	while (++i < all.data.nb_philo)
-	{
-		all.philo[i].id = i + 1;
-		pthread_create(&all.data.ph[i], NULL, simulation, (void *)&all.philo[i]);//protect from error pthread!!!
-	}
+	simulation(&all);
+	// i = -1;
+	// while (++i < all.data.nb_philo)
+	// {
+	// 	all.philo[i].id = i + 1;
+	// 	pthread_create(&all.data.ph[i], NULL, philosopher, (void *)&all.philo[i]);//protect from error pthread!!!
+	// }
 
 	i = -1;
 	while (++i < all.data.nb_philo)
@@ -22,6 +23,21 @@ int main(int ac, char **av)
 
 	usleep(3000000);
 	return (0);
+}
+
+int	simulation(t_all *all)
+{
+	int		i;
+
+	i = -1;
+	while (++i < all->data.nb_philo)
+	{
+printf("test 1\n");
+		all->philo[i].id = i + 1;
+printf("test 2\n");
+		pthread_create(&all->data.ph[i], NULL, philosopher, (void *)&all->philo[i]);//protect from error pthread!!!
+	}
+	return (i);
 }
 
 /************************************

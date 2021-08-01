@@ -23,7 +23,7 @@ int	start_all(t_all *all, char **av)
 		(write(STDERR_FILENO, "Error: malloc error\n", 26));
 		return (1);
 	}
-	memset(all->philo, 0, sizeof(t_philo));
+	// memset(all->philo, 0, sizeof(t_philo));
 	int	i = 0;
 	while (i < all->data.nb_philo)
 		all->philo[i++].d = &all->data;
