@@ -12,15 +12,14 @@ int main(int ac, char **av)
 	i = -1;
 	while (++i < all.data.nb_philo)
 	{
-printf("test 1\n");
 		all.philo[i].id = i + 1;
 		pthread_create(&all.data.ph[i], NULL, simulation, (void *)&all.philo[i]);//protect from error pthread!!!
-printf("test 2\n");
 	}
 	i = -1;
 	while (++i < all.data.nb_philo)
 		pthread_join(all.data.ph[i], NULL);
-	usleep(16000);
+	usleep(3000000);
+printf("test 1\n");
 	return (0);
 }
 

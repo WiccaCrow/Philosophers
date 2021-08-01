@@ -1,7 +1,7 @@
 NAME		=		philo
 
 CCF			=		gcc $(FLAGS)
-CFLAGS		=		-Wall -Wextra -Werror -g -I./
+CFLAGS		=		-Wall -Wextra -Werror -lpthread -g -I./
 
 SRCS		=		philo_main.c philo_start_all.c \
 					philo_simulation.c philo_print_status.c\
