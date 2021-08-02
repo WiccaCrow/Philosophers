@@ -30,8 +30,7 @@ int	start_all(t_all *all, char **av)
 		all->philo[i].d = &all->data;
 		all->philo[i].id = i + 1;
 	}
-
-
+	
 	all->data.time_to_die = ft_atoi(av[2]);
 	all->data.time_to_eat = ft_atoi(av[3]);
 	all->data.time_to_sleep = ft_atoi(av[4]);

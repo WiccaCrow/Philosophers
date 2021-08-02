@@ -9,7 +9,6 @@ int main(int ac, char **av)
 		return (2);
 	if (start_all(&all, av))
 		return (1);
-
 	i = simulation(&all);
 	while (i--)
 		pthread_join(all.data.ph[i], NULL);

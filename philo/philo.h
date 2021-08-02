@@ -33,6 +33,8 @@ typedef struct	s_data
 	int				time_to_sleep;
 	int				time_stop_eat;
 	char			**colors;
+	int				died;
+	long int		died_time;
 	// struct timeval	tv;
 }				t_data;
 
@@ -40,7 +42,7 @@ typedef struct	s_philo
 {
 	int				id;
 	long int		eat_end_time;
-	int				died;
+	// int				died;
 	struct timeval	tv;
 	t_data			*d;
 	
@@ -64,7 +66,7 @@ int			simulation(t_all *all);
 void		*philosopher(void *all);
 
 long int	ft_gettime(t_philo *all);
-int			ft_think(t_philo *all);
+void		ft_think(t_philo *all);
 void		ft_sleep(t_philo *all);
 void		ft_eat(t_philo *all);
 void		ft_died(t_philo *all);
