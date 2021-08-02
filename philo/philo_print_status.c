@@ -67,20 +67,7 @@ void	ft_died(t_philo *ph)
 void	print_status(t_philo *ph, long int timestap_in_ms, char *message)
 {
 	int		i;
-	char	*str_nb;
 
 	i = ph->id % 6;
-	printf("%s%ld %d%s%s", ph->d->colors[i], timestap_in_ms, ph->id, message, ph->d->colors[6]);
-
-	// write(STDOUT_FILENO, ph->d->colors[i], ft_strlen(ph->d->colors[i]));
-	// str_nb = ft_itoa(timestap_in_ms);
-	// write(STDOUT_FILENO, str_nb, ft_strlen(str_nb));
-	// free(str_nb);
-	// write(STDOUT_FILENO, " ", 1);
-	// str_nb = ft_itoa(ph->id);
-	// write(STDOUT_FILENO, str_nb, ft_strlen(str_nb));
-	// free(str_nb);
-	// write(STDOUT_FILENO, message, ft_strlen(message));
-	// write(STDOUT_FILENO, ph->d->colors[6], ft_strlen(ph->d->colors[6]));
-	// write(STDOUT_FILENO, "\n", 1);
+	printf("%s%ld %d%s%s\n", ph->d->colors[i], timestap_in_ms, ph->id, message, ph->d->colors[6]);
 }

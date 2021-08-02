@@ -13,20 +13,24 @@ int	start_all(t_all *all, char **av)
 	all->data.ph = (pthread_t *)malloc(sizeof(pthread_t) * all->data.nb_philo);
 	if (!all->data.ph)
 	{
-		(write(STDERR_FILENO, "Error: malloc error\n", 26));
+		(write(STDERR_FILENO, "Error: malloc error\n", 20));
 		return (1);
 	}
 
 	all->philo = (t_philo *)malloc(sizeof(t_philo) * all->data.nb_philo);
 	if (!all->philo)
 	{
-		(write(STDERR_FILENO, "Error: malloc error\n", 26));
+		(write(STDERR_FILENO, "Error: malloc error\n", 20));
 		return (1);
 	}
 	memset(all->philo, 0, sizeof(t_philo));
-	int	i = 0;
-	while (i < all->data.nb_philo)
-		all->philo[i++].d = &all->data;
+	int	i = -1;
+	while (++i < all->data.nb_philo)
+	{
+		all->philo[i].d = &all->data;
+		all->philo[i].id = i + 1;
+	}
+
 
 	all->data.time_to_die = ft_atoi(av[2]);
 	all->data.time_to_eat = ft_atoi(av[3]);

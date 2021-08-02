@@ -1,26 +1,28 @@
 NAME		=		philo
 
 CCF			=		gcc $(FLAGS)
-CFLAGS		=		-Wall -Wextra -Werror -lpthread -g -I./
+# CFLAGS		=		-Wall -Wextra -Werror -lpthread -g -I./
+CFLAGS		=		-Wall -Wextra -Werror -g -I./
 
 SRCS		=		philo_main.c philo_start_all.c \
+					philo_watching.c \
 					philo_simulation.c philo_print_status.c\
 					functions.c
 OBJS		=		$(SRCS:.c=.o)
 %.o:		%.c $(HDR)
 			@$(CCF) -c $< -o $@
-			@echo "${GREEN}"$@ "compilled${ENDCOLOR}"
+			@echo "$(GREEN)"$@ "compilled$(ENDCOLOR)"
 
 HDR			=		philo.h
 
 GREEN		=		\033[92m
-ENDCOLOR	=		\x1B[0m
+ENDCOLOR	=		\033[0m
 
 all:	$(NAME)
 
 $(NAME):	$(OBJS) $(HDR)
-			@$(CCF) $(OBJS) -o $(NAME)
-			@echo "${GREEN}"$(NAME)" is compiled${ENDCOLOR}"
+			@$(CCF) $(OBJS) -o $(NAME) -pthread
+			@echo "$(GREEN)$(NAME) is compiled $(ENDCOLOR)"
 
 clean:
 			@rm -f $(OBJS)

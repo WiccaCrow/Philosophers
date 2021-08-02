@@ -59,7 +59,9 @@ void	exit_clean(t_all *all);
 
 int			valid_ac(int ac, char **av);
 int			start_all(t_all *all, char **av);
-void		*simulation(void *all);
+void    	watching_every_alive(t_all *all);
+int			simulation(t_all *all);
+void		*philosopher(void *all);
 
 long int	ft_gettime(t_philo *all);
 int			ft_think(t_philo *all);
