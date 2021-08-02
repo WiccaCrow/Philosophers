@@ -1,9 +1,9 @@
 #include "philo.h"
 
-int	ft_atoi(const char *str)
+long int	ft_atoi(const char *str)
 {
 	int					i;
-	unsigned long int	n;
+	long int	n;
 	int					sign;
 
 	i = 0;

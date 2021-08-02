@@ -55,7 +55,7 @@ typedef struct	s_all
 	t_philo	*philo;
 }				t_all;
 
-int		ft_atoi(const char *str);
+long int		ft_atoi(const char *str);
 int		ft_strlen(const char *s);
 char	*ft_itoa(long int n);
 void	exit_clean(t_all *all);
