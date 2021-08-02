@@ -28,13 +28,14 @@ typedef struct	s_data
 	int				comp_code;
 	pthread_t		*ph;
 	int				nb_philo;
-	int				time_to_die;
+	long int		time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				time_stop_eat;
 	char			**colors;
 	int				died;
 	long int		died_time;
+	long int		simul_start;
 	// struct timeval	tv;
 }				t_data;
 
@@ -61,7 +62,7 @@ void	exit_clean(t_all *all);
 
 int			valid_ac(int ac, char **av);
 int			start_all(t_all *all, char **av);
-void    	watching_every_alive(t_all *all);
+void		*watching_every_alive(void *all);
 int			simulation(t_all *all);
 void		*philosopher(void *all);
 

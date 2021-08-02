@@ -19,10 +19,12 @@ int main(int ac, char **av)
 
 int	simulation(t_all *all)
 {
-	int		i;
+	int			i;
+	pthread_t	wea;
 
+	all->data.simul_start = ft_gettime(all->philo);
+	pthread_create(&wea, NULL, watching_every_alive, (void *)all);
 	i = -1;
-	watching_every_alive(all);
 	while (++i < all->data.nb_philo)
 	{
 		if (pthread_create(&all->data.ph[i], NULL, philosopher, (void *)&all->philo[i]))

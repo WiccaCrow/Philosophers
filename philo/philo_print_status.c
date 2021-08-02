@@ -20,10 +20,10 @@ void	ft_think(t_philo *ph)
 
 		int	i;
 		i = ph->id % 6;
-	time = ft_gettime(ph);
-	if (time != -1 && ph->d->died_time > time)
-		// print_status(ph, time, MESS_THINK);
-		printf("%s%ld %d%s%s\n", ph->d->colors[i], time, ph->id, MESS_THINK, ph->d->colors[6]);
+	time = ft_gettime(ph) - ph->d->simul_start;
+	if (time != -1)
+		print_status(ph, time, MESS_THINK);
+		// printf("%s%ld %d%s%s\n", ph->d->colors[i], time, ph->id, MESS_THINK, ph->d->colors[6]);
 }
 
 void	ft_sleep(t_philo *ph)
@@ -32,11 +32,11 @@ void	ft_sleep(t_philo *ph)
 
 		int	i;
 		i = ph->id % 6;
-	time = ft_gettime(ph);
-	if (time != -1 && ph->d->died_time > time)
-		// print_status(ph, time, MESS_SLEEP);
+	time = ft_gettime(ph) - ph->d->simul_start;
+	if (time != -1)
 	{
-		printf("%s%ld %d%s%s\n", ph->d->colors[i], time, ph->id, MESS_SLEEP, ph->d->colors[6]);
+		print_status(ph, time, MESS_SLEEP);
+		// printf("%s%ld %d%s%s\n", ph->d->colors[i], time, ph->id, MESS_SLEEP, ph->d->colors[6]);
 		usleep(ph->d->time_to_sleep);
 	}
 }
@@ -47,12 +47,12 @@ void	ft_died(t_philo *ph)
 
 		int	i;
 		i = ph->id % 6;
-	time = ft_gettime(ph);
+	time = ft_gettime(ph) - ph->d->simul_start;
 	if (time != -1 && !ph->d->died)
 	{
 		ph->d->died_time = time;
-		// print_status(ph, time, MESS_DIED);
-		printf("%s%ld %d%s%s\n", ph->d->colors[i], time, ph->id, MESS_DIED, ph->d->colors[6]);
+		print_status(ph, time, MESS_DIED);
+		// printf("%s%ld %d%s%s\n", ph->d->colors[i], time, ph->id, MESS_DIED, ph->d->colors[6]);
 	}
 }
 
