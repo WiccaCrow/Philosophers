@@ -33,10 +33,10 @@ int	start_all(t_all *all, char **av)
 	}
 
 	all->data.time_to_die = ft_atoi(av[2]);
-	all->data.time_to_eat = ft_atoi(av[3]);
-	all->data.time_to_sleep = ft_atoi(av[4]);
+	all->data.time_to_eat = ft_atoi(av[3]) * 1000;
+	all->data.time_to_sleep = ft_atoi(av[4]) * 1000;
 	if (av[5])
-		all->data.time_stop_eat = ft_atoi(av[5]);
+		all->data.time_stop_eat = ft_atoi(av[5]) * 1000;
 	all->data.colors = (char **)malloc(sizeof(char *) * 8);
 	all->data.colors[0] = strdup(ANSI_COLOR_RED);
 	all->data.colors[1] = strdup(ANSI_COLOR_GREEN);

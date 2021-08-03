@@ -51,8 +51,9 @@ typedef struct	s_philo
 
 typedef struct	s_all
 {
-	t_data	data;
-	t_philo	*philo;
+	t_data		data;
+	t_philo		*philo;
+	pthread_t	sim_stop;
 }				t_all;
 
 long int		ft_atoi(const char *str);
@@ -62,10 +63,12 @@ void	exit_clean(t_all *all);
 
 int			valid_ac(int ac, char **av);
 int			start_all(t_all *all, char **av);
-void		*watching_every_alive(void *all);
 int			simulation(t_all *all);
-void		*philosopher(void *all);
+void	*simulation_stop(void *all);
+void	check_time_to_die(t_philo *ph, t_data *d, long int time_current);
 
+void		*philosopher(void *all);
+long int	ft_gettime_simul_start(t_philo *ph);
 long int	ft_gettime(t_philo *all);
 void		ft_think(t_philo *all);
 void		ft_sleep(t_philo *all);

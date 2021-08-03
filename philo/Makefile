@@ -5,8 +5,8 @@ CCF			=		gcc $(FLAGS)
 CFLAGS		=		-Wall -Wextra -Werror -g -I./
 
 SRCS		=		philo_main.c philo_start_all.c \
-					philo_watching.c \
-					philo_simulation.c philo_print_status.c\
+					philo_simulation.c philo_simulation_stop.c\
+					philo_gettime.c philo_print_status.c\
 					functions.c
 OBJS		=		$(SRCS:.c=.o)
 %.o:		%.c $(HDR)
