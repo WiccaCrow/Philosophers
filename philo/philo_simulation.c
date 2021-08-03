@@ -24,22 +24,14 @@ void	ft_eat(t_philo *ph)
 	long int	time_hungry;
 
 	time = ft_gettime(ph);
-// time_hungry = time - ph->eat_end_time;
-// printf("time = %ld | ph->eat_end_time = %ld | hungry = %ld | max time = %ld\n", time, ph->eat_end_time, time_hungry, ph->d->time_to_die);
 	if (time != -1)
 	{
-	// check_time_to_die(ph, ((t_philo *)ph)->d, time);
-		// if (time_hungry >= ph->d->time_to_die)
-		// {
-		// 	ft_died(ph);
-		// 	ph->d->died = 1;
-		// 	exit(2) ;
-		// }
 		print_status(ph, time, MESS_EAT);
 	}
-	usleep(ph->d->time_to_eat);
+	ft_usleep(ph->d->time_to_eat);
+	// ph->eat_end_time = time + ph->d->time_to_eat;
 	ph->eat_end_time = ft_gettime(ph);
-	// printf("ph->eat_end_time = %ld\n", ph->eat_end_time);
+
 }
 
 void	eat_or_died(t_philo *ph)
@@ -52,16 +44,14 @@ void	eat_or_died(t_philo *ph)
 void	*philosopher(void *ph)
 {
 	int	i;
-
+// printf("test ph 0\n");
 	i = ((t_philo *)ph)->id;
-	pthread_detach(((t_philo *)ph)->d->ph[i]);
-	while (0 == ((t_philo *)ph)->d->died)
+	while (1)
 	{
+// printf("test ph 1\n");
 		eat_or_died((t_philo *)ph);
-		if (0 == ((t_philo *)ph)->d->died) 
-		{
-			ft_sleep((t_philo *)ph);
-			ft_think((t_philo *)ph);
-		}
+// printf("test ph 2\n");
+		ft_sleep((t_philo *)ph);
+		ft_think((t_philo *)ph);
 	}
 }

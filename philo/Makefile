@@ -31,3 +31,5 @@ fclean:		clean
 			@rm -f $(NAME)
 
 re:			fclean all
+
+# clang -g -o philo *.c -pthread

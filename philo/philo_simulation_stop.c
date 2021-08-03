@@ -7,17 +7,18 @@ void	*simulation_stop(void *all)
 	int			i;
 	long int	time_current;
 
-	pthread_detach(((t_all *)all)->sim_stop);
 	while (1)
 	{
 		i = - 1;
+// printf("test 1\n");
 		time_current = ft_gettime(((t_all *)all)->philo);
+		// printf("time %ld\n", time_current);
 		while (++i < ((t_all *)all)->data.nb_philo)
 		{
 			check_time_to_die(&((t_all *)all)->philo[i], &((t_all *)all)->data, time_current);
 		}
+		usleep(100);
 	}
-	usleep(900);
 	return (0);
 	// printf("simul_start = %ld\n", ((t_all *)all)->data.simul_start);
 

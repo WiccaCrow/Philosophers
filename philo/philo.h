@@ -25,7 +25,6 @@
 
 typedef struct	s_data
 {
-	int				comp_code;
 	pthread_t		*ph;
 	int				nb_philo;
 	long int		time_to_die;
@@ -57,18 +56,19 @@ typedef struct	s_all
 }				t_all;
 
 long int		ft_atoi(const char *str);
-int		ft_strlen(const char *s);
-char	*ft_itoa(long int n);
-void	exit_clean(t_all *all);
+int				ft_strlen(const char *s);
+char			*ft_itoa(long int n);
+void			ft_usleep(long int time_stop);
+void			exit_clean(t_all *all);
 
 int			valid_ac(int ac, char **av);
 int			start_all(t_all *all, char **av);
 int			simulation(t_all *all);
-void	*simulation_stop(void *all);
-void	check_time_to_die(t_philo *ph, t_data *d, long int time_current);
+void		*simulation_stop(void *all);
+void		check_time_to_die(t_philo *ph, t_data *d, long int time_current);
 
 void		*philosopher(void *all);
-long int	ft_gettime_simul_start(t_philo *ph);
+long int	ft_gettime_simul_start();
 long int	ft_gettime(t_philo *all);
 void		ft_think(t_philo *all);
 void		ft_sleep(t_philo *all);
