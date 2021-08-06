@@ -85,18 +85,10 @@ void	ft_usleep(long int time_stop)
 	struct timeval	tv;	
 
 	time_start = ft_gettime_simul_start();
-// printf("usleep 0 %ld\n", time_start);
 	time_last = time_start;
 	while (time_last - time_start < time_stop)
 	{
 		time_last = ft_gettime_simul_start();
-// printf("usleep 1\n");
 		usleep(100);
-		usleep(100);
-		usleep(100);
-		usleep(100);
-		usleep(100);
-// printf("usleep 2 %ld\n", time_last);
 	}
-// printf("usleep 3\n");
 }

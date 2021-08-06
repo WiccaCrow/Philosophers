@@ -23,7 +23,7 @@ void	ft_sleep(t_philo *ph)
 	{
 		print_status(ph, time, MESS_SLEEP);
 		// printf("%s%ld %d%s%s\n", ph->d->colors[i], time, ph->id, MESS_SLEEP, ph->d->colors[6]);
-		ft_usleep(ph->d->time_to_sleep);
+		ft_usleep(ph->d->time_to_sleep / 1000);// в ft_usleep милисекунды, поэтому не нужно переводить из в микросекунды
 	}
 }
 

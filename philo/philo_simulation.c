@@ -28,8 +28,7 @@ void	ft_eat(t_philo *ph)
 	{
 		print_status(ph, time, MESS_EAT);
 	}
-	ft_usleep(ph->d->time_to_eat);
-	// ph->eat_end_time = time + ph->d->time_to_eat;
+	ft_usleep(ph->d->time_to_eat / 1000);// в ft_usleep милисекунды, поэтому не нужно переводить из в микросекунды
 	ph->eat_end_time = ft_gettime(ph);
 
 }
@@ -44,13 +43,10 @@ void	eat_or_died(t_philo *ph)
 void	*philosopher(void *ph)
 {
 	int	i;
-// printf("test ph 0\n");
 	i = ((t_philo *)ph)->id;
 	while (1)
 	{
-// printf("test ph 1\n");
 		eat_or_died((t_philo *)ph);
-// printf("test ph 2\n");
 		ft_sleep((t_philo *)ph);
 		ft_think((t_philo *)ph);
 	}

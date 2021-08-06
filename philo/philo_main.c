@@ -9,20 +9,11 @@ int main(int ac, char **av)
 		return (2);
 	if (start_all(&all, av))
 		return (1);
-// ft_usleep(1000);
-	// while (!simulation_stop(&all))
-	// 	;
-printf("test main 1\n");
 	i = simulation(&all);
-printf("test main 2\n");
-	// if (pthread_create(&all.sim_stop, NULL, simulation_stop, (void *)&all))
-	// 	return (i) ;
+	if (pthread_create(&all.sim_stop, NULL, simulation_stop, (void *)&all))
+		return (i) ;
 	// pthread_detach(all.sim_stop);
-	// while (i--)
-	// 	pthread_join(all.data.ph[i], NULL);
-	ft_usleep(3000000);
-	// pthread_join(all.sim_stop, NULL);
-	printf("test main finish\n");
+	pthread_join(all.sim_stop, NULL);
 	return (0);
 }
 
@@ -30,10 +21,7 @@ int	simulation(t_all *all)
 {
 	int			i;
 	pthread_t	wea;
-printf("test sim 0\n");
 	all->data.simul_start = ft_gettime_simul_start();
-	// pthread_create(&wea, NULL, simulation_stop, (void *)all);
-printf("test sim 1\n");
 	i = -1;
 	while (++i < all->data.nb_philo)
 	{
@@ -43,10 +31,9 @@ printf("test sim 1\n");
 			return (i);
 		}
 		pthread_detach(all->data.ph[i]);
-printf("test sim 2\n");
 	}
-	// if (i != all->data.nb_philo)
-	// 	write(STDERR_FILENO, "Error: pthread_create\n", 22);
+	if (i != all->data.nb_philo)
+		write(STDERR_FILENO, "Error: pthread_create\n", 22);
 	return (i);
 }
 /************************************
