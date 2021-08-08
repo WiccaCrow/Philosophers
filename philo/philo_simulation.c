@@ -20,17 +20,17 @@ void	take_forks(t_philo *ph)
 
 void	ft_eat(t_philo *ph)
 {
-	long int	time;
 	long int	time_hungry;
 
-	time = ft_gettime(ph);
-	if (time != -1)
+	ph->eat_start_time = ft_gettime(ph);
+	if (ph->eat_start_time != -1)
 	{
-		print_status(ph, time / 1000, MESS_EAT);
+		print_status(ph, ph->eat_start_time / 1000, MESS_EAT);
 	}
 	ft_usleep(ph->d->time_to_eat);
-	ph->eat_end_time = time + ph->d->time_to_eat; printf("end eat %d = %ld\n", ph->id, ph->eat_end_time);
-
+	ph->eat_end_time = ft_gettime(ph);
+	// ph->eat_end_time = ph->eat_start_time + ph->d->time_to_eat + 999;
+// printf("end eat %d = %ld\n", ph->id, ph->eat_end_time);
 }
 
 void	eat_or_died(t_philo *ph)

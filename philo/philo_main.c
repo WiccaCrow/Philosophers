@@ -21,10 +21,8 @@ int	simulation(t_all *all)
 {
 	int			i;
 	pthread_t	wea;
+
 	all->data.simul_start = ft_gettime_simul_start();
-printf("test\n");
-printf("%ld\n", all->data.simul_start);
-printf("test\n");
 	i = -1;
 	while (++i < all->data.nb_philo)
 	{
