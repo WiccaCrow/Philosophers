@@ -26,6 +26,7 @@
 typedef struct	s_data
 {
 	pthread_t		*ph;
+	pthread_mutex_t	mutex_die;
 	int				nb_philo;
 	long int		time_to_die;
 	int				time_to_eat;
@@ -50,9 +51,9 @@ typedef struct	s_philo
 
 typedef struct	s_all
 {
-	t_data		data;
-	t_philo		*philo;
-	pthread_t	sim_stop;
+	t_data			data;
+	t_philo			*philo;
+	pthread_t		sim_stop;
 }				t_all;
 
 long int		ft_atoi(const char *str);
@@ -65,7 +66,7 @@ int			valid_ac(int ac, char **av);
 int			start_all(t_all *all, char **av);
 int			simulation(t_all *all);
 void		*simulation_stop(void *all);
-void		check_time_to_die(t_philo *ph, t_data *d, long int time_current);
+int			check_time_to_die(t_philo *ph, t_data *d, long int time_current);
 
 void		*philosopher(void *all);
 long int	ft_gettime_simul_start();
@@ -73,7 +74,7 @@ long int	ft_gettime(t_philo *all);
 void		ft_think(t_philo *all);
 void		ft_sleep(t_philo *all);
 void		ft_eat(t_philo *all);
-void		ft_died(t_philo *all);
+// void		ft_died(t_philo *all);
 void		print_status(t_philo *all, long int timestap_in_ms, char *message);
 
 #endif

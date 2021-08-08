@@ -28,7 +28,7 @@ void	ft_eat(t_philo *ph)
 	{
 		print_status(ph, time, MESS_EAT);
 	}
-	ft_usleep(ph->d->time_to_eat / 1000);// в ft_usleep милисекунды, поэтому не нужно переводить из в микросекунды
+	ft_usleep(ph->d->time_to_eat);// в ft_usleep милисекунды, поэтому не нужно переводить из в микросекунды
 	ph->eat_end_time = ft_gettime(ph);
 
 }

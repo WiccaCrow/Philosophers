@@ -2,8 +2,8 @@
 
 int main(int ac, char **av)
 {
-	t_all		all;
-	int			i;
+	t_all			all;
+	int				i;
 
 	if (valid_ac(ac, av))
 		return (2);

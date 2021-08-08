@@ -7,12 +7,10 @@ long int	ft_gettime_simul_start()
 
 	if (gettimeofday(&tv, NULL))
 	{
-		(write(STDERR_FILENO, "Error: gettimeofday error\n", 26));
+		write(STDERR_FILENO, "Error: gettimeofday error\n", 26);
 		return (-1);
 	}
-// printf("gettime 1\n");
 	timestap_in_ms = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-// printf("gettime 2\n");
 	return (timestap_in_ms);
 }
 

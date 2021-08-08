@@ -82,13 +82,14 @@ void	ft_usleep(long int time_stop)
 {
 	long int		time_start;
 	long int		time_last;
-	struct timeval	tv;	
+	struct timeval	tv;
 
-	time_start = ft_gettime_simul_start();
-	time_last = time_start;
-	while (time_last - time_start < time_stop)
+	time_stop = time_stop * 1000 - 200;//167
+	gettimeofday(&tv, NULL);
+	time_start = tv.tv_sec * 1000000 + tv.tv_usec;
+	while (tv.tv_sec * 1000000 + tv.tv_usec - time_start < time_stop)
 	{
-		time_last = ft_gettime_simul_start();
+		gettimeofday(&tv, NULL);
 		usleep(100);
 	}
 }
