@@ -12,8 +12,8 @@ int main(int ac, char **av)
 	i = simulation(&all);
 	if (pthread_create(&all.sim_stop, NULL, simulation_stop, (void *)&all))
 		return (i) ;
-	// pthread_detach(all.sim_stop);
 	pthread_join(all.sim_stop, NULL);
+	// ft_usleep(1000000);
 	return (0);
 }
 
@@ -22,6 +22,9 @@ int	simulation(t_all *all)
 	int			i;
 	pthread_t	wea;
 	all->data.simul_start = ft_gettime_simul_start();
+printf("test\n");
+printf("%ld\n", all->data.simul_start);
+printf("test\n");
 	i = -1;
 	while (++i < all->data.nb_philo)
 	{

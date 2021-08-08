@@ -13,7 +13,7 @@ void	take_forks(t_philo *ph)
 	time = ft_gettime(ph);
 	if (time != -1)
 	{
-		print_status(ph, time, MESS_FORK);
+		print_status(ph, time / 1000, MESS_FORK);
 	}
 }
 
@@ -26,10 +26,10 @@ void	ft_eat(t_philo *ph)
 	time = ft_gettime(ph);
 	if (time != -1)
 	{
-		print_status(ph, time, MESS_EAT);
+		print_status(ph, time / 1000, MESS_EAT);
 	}
-	ft_usleep(ph->d->time_to_eat);// в ft_usleep милисекунды, поэтому не нужно переводить из в микросекунды
-	ph->eat_end_time = ft_gettime(ph);
+	ft_usleep(ph->d->time_to_eat);
+	ph->eat_end_time = time + ph->d->time_to_eat; printf("end eat %d = %ld\n", ph->id, ph->eat_end_time);
 
 }
 

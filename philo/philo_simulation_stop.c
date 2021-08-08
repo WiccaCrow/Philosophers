@@ -24,12 +24,12 @@ int	check_time_to_die(t_philo *ph, t_data *d, long int time_current)
 	int	i;
 
 	i = ph->id % 6;
-	if (ph->eat_end_time + d->time_to_die <= time_current)
+	if (ph->eat_end_time + d->time_to_die <= time_current
+		&& ph->eat_start_time + d->time_to_die <= time_current)
 	{
 		pthread_mutex_lock(&(ph->d->mutex_die));
 printf("time_cur = %ld | ph->eat_end_time = %ld | hungry = %ld | max time = %ld\n", time_current, ph->eat_end_time, time_current - ph->eat_end_time, d->time_to_die);
-		// print_status(ph, time_current, MESS_DIED);
-		printf("%s%ld %d%s%s\n", ph->d->colors[i], time_current, ph->id, MESS_DIED, ph->d->colors[6]);
+		printf("%s%ld %d%s%s\n", ph->d->colors[i], time_current / 1000, ph->id, MESS_DIED, ph->d->colors[6]);
 		return (2);
 	}
 	return (0);

@@ -2,7 +2,7 @@
 
 long int	ft_gettime_simul_start()
 {
-	long int		timestap_in_ms;
+	long int		timestap_in_mcs;
 	struct timeval	tv;
 
 	if (gettimeofday(&tv, NULL))
@@ -10,8 +10,8 @@ long int	ft_gettime_simul_start()
 		write(STDERR_FILENO, "Error: gettimeofday error\n", 26);
 		return (-1);
 	}
-	timestap_in_ms = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-	return (timestap_in_ms);
+	timestap_in_mcs = tv.tv_sec * 1000000 + tv.tv_usec;
+	return (timestap_in_mcs);
 }
 
 long int	ft_gettime(t_philo *ph)

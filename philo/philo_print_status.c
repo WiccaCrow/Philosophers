@@ -4,11 +4,11 @@ void	ft_think(t_philo *ph)
 {
 	long int	time;
 
-		int	i;
-		i = ph->id % 6;
+	int	i;
+	i = ph->id % 6;
 	time = ft_gettime(ph);
 	if (time != -1)
-		print_status(ph, time, MESS_THINK);
+		print_status(ph, time / 1000, MESS_THINK);
 		// printf("%s%ld %d%s%s\n", ph->d->colors[i], time, ph->id, MESS_THINK, ph->d->colors[6]);
 }
 
@@ -21,7 +21,7 @@ void	ft_sleep(t_philo *ph)
 	time = ft_gettime(ph);
 	if (time != -1)
 	{
-		print_status(ph, time, MESS_SLEEP);
+		print_status(ph, time / 1000, MESS_SLEEP);
 		// printf("%s%ld %d%s%s\n", ph->d->colors[i], time, ph->id, MESS_SLEEP, ph->d->colors[6]);
 		ft_usleep(ph->d->time_to_sleep);// в ft_usleep милисекунды, поэтому не нужно переводить из в микросекунды
 	}

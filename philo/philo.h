@@ -43,7 +43,7 @@ typedef struct	s_philo
 {
 	int				id;
 	long int		eat_end_time;
-	// int				died;
+	long int		eat_start_time;
 	struct timeval	tv;
 	t_data			*d;
 	

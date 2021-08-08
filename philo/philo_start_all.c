@@ -29,13 +29,15 @@ int	start_all(t_all *all, char **av)
 	int	i = -1;
 	while (++i < all->data.nb_philo)
 	{
+		all->philo[i].d = (t_data *)malloc(sizeof(t_data) * 1);
 		all->philo[i].d = &all->data;
 		all->philo[i].id = i + 1;
+
 	}
 
-	all->data.time_to_die = ft_atoi(av[2]);
-	all->data.time_to_eat = ft_atoi(av[3]);
-	all->data.time_to_sleep = ft_atoi(av[4]);
+	all->data.time_to_die = ft_atoi(av[2]) * 1000;
+	all->data.time_to_eat = ft_atoi(av[3]) * 1000;
+	all->data.time_to_sleep = ft_atoi(av[4]) * 1000;
 	if (av[5])
 		all->data.time_stop_eat = ft_atoi(av[5]);
 	all->data.colors = (char **)malloc(sizeof(char *) * 8);
