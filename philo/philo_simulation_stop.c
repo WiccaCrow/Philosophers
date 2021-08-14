@@ -24,13 +24,11 @@ int	check_time_to_die(t_philo *ph, t_data *d, long int time_current)
 	int	i;
 
 	i = ph->id % 6;
-	if ((time_current - ph->eat_end_time) / 1000 > d->time_to_die / 1000
-		&& (time_current - ph->eat_start_time) / 1000 > d->time_to_die / 1000
-		&& ph->eat_start_time < ph->eat_end_time
-		// && (ph->eat_start_time - ph->eat_end_time) / 1000 > d->time_to_die / 1000
-		// && (ph->eat_end_time && (time_current - ph->eat_end_time) / 1000)
-		// && (ph->eat_start_time && (time_current - ph->eat_start_time) / 1000)
-		)
+	// if ((time_current - ph->eat_end_time) / 1000 > d->time_to_die / 1000
+	// 	&& (time_current - ph->eat_start_time) / 1000 > d->time_to_die / 1000
+	// 	&& ph->eat_start_time < ph->eat_end_time
+	// 	) // условие на голод - между концом приема пищи и началом след приема пищи проверяю время
+	if ((time_current - ph->eat_start_time) / 1000 > d->time_to_die / 1000)
 	{
 		pthread_mutex_lock(&(ph->d->mutex_die));
 printf("start_eat - end_eat = %ld | max time = %ld\n\n", ph->eat_start_time - ph->eat_end_time, d->time_to_die);
