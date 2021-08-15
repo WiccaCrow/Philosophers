@@ -16,11 +16,19 @@ void	put_fork(t_philo *ph)
 // 		print_status(ph, time / 1000, MESS_FORK);
 // 	}
 // }
+//m.lock(m);
 
 void	take_forks(t_philo *ph)
 {
 	long int	time;
+	int			nb_mutex_fork;
 
+	nb_mutex_fork = ph->id - 1;
+	if (nb_mutex_fork == 0)
+	{
+		
+	}
+	ph->d->mutex_forks[ph->id - 1].lock(ph->d->mutex_forks[ph->id - 1]);
 	time = ft_gettime(ph);
 	if (time != -1)
 	{
