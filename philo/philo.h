@@ -29,9 +29,9 @@ typedef struct	s_data
 	pthread_mutex_t	mutex_die;
 	int				nb_philo;
 	long int		time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				time_stop_eat;
+	long int		time_to_eat;
+	long int		time_to_sleep;
+	long int		time_stop_eat;
 	char			**colors;
 	int				died;
 	long int		died_time;

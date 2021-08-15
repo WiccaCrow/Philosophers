@@ -13,7 +13,6 @@ int main(int ac, char **av)
 	if (pthread_create(&all.sim_stop, NULL, simulation_stop, (void *)&all))
 		return (i) ;
 	pthread_join(all.sim_stop, NULL);
-	// ft_usleep(1000000);
 	return (0);
 }
 
@@ -62,10 +61,24 @@ int	valid_ac(int ac, char **av)
 	nb_arg = 0;
 	while (av[++nb_arg])
 	{
-		i = -1;
-		while (av[nb_arg][++i])
-			if (av[nb_arg][i] < '0' || av[nb_arg][i] > '9')
-				return (write(STDERR_FILENO, "Error: arguments must be a number\n", 34));
+		if (av[nb_arg][0] == '\0')
+			return (write(STDERR_FILENO, "Error: arguments must be a number\n", 34));
+		i = 0;
+		while (av[nb_arg][i])
+		{
+			++i;
+			while (av[nb_arg][i] != '\0' && av[nb_arg][i] <= 32)
+				++i;
+			while (av[nb_arg][i] && (av[nb_arg][i] >= '0' && av[nb_arg][i] <= '9'))
+				++i;
+			if (av[nb_arg][i] && (av[nb_arg][i] < '0' || av[nb_arg][i] > '9'))
+			{
+				while (av[nb_arg][i] && av[nb_arg][i] <= 32)
+					++i;
+				if (av[nb_arg][i])				
+					return (write(STDERR_FILENO, "Error: arguments must be a number\n", 34));
+			}
+		}
 	}
 	return (0);
 }
