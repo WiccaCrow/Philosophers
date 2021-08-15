@@ -23,10 +23,22 @@
 # define ANSI_COLOR_CYAN    "\x1b[36m"
 # define ANSI_COLOR_RESET   "\x1b[0m"
 
+typedef struct	s_ft_mutex
+{
+	pthread_mutex_t		data;
+	// atomic int			mutex_lock;
+	int			mutex_lock;
+	struct s_ft_mutex	*self;
+
+	void				(*lock)(struct s_ft_mutex *self);
+	void				(*unlock)(struct s_ft_mutex *self);
+}				ft_mutex_t;
+
 typedef struct	s_data
 {
 	pthread_t		*ph;
 	pthread_mutex_t	mutex_die;
+	ft_mutex_t		*mutex_forks;
 	int				nb_philo;
 	long int		time_to_die;
 	long int		time_to_eat;
@@ -55,6 +67,10 @@ typedef struct	s_all
 	t_philo			*philo;
 	pthread_t		sim_stop;
 }				t_all;
+
+void	ft_mutex_init(ft_mutex_t *m);
+void	ft_mutex_unlock(ft_mutex_t *m);
+void	ft_mutex_lock(ft_mutex_t *m);
 
 long int		ft_atoi(const char *str);
 int				ft_strlen(const char *s);

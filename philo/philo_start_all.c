@@ -32,8 +32,14 @@ int	start_all(t_all *all, char **av)
 		all->philo[i].d = (t_data *)malloc(sizeof(t_data) * 1);
 		all->philo[i].d = &all->data;
 		all->philo[i].id = i + 1;
-
 	}
+
+	all->data.mutex_forks = (ft_mutex_t *)malloc(sizeof(ft_mutex_t) * all->data.nb_philo);
+	i = -1;
+	while (++i < all->data.nb_philo)
+	{
+		ft_mutex_init(&all->data.mutex_forks[i]);
+	}	
 
 	all->data.time_to_die = ft_atoi(av[2]) * 1000;
 	all->data.time_to_eat = ft_atoi(av[3]) * 1000;

@@ -33,7 +33,7 @@ void init(t_mutex *m)
     m->_lock = 0;
     m->self = m;
     m->lock = &lock;
-    m->unlock = &unlock; 
+    m->unlock = &unlock;
     pthread_mutex_init(&m->data, 0);
 }
 
