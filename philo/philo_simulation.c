@@ -2,8 +2,8 @@
 
 void	put_fork(t_philo *ph)
 {
-	if (ph)
-		return ;
+	ph->d->mutex_forks[ph->nb_mutex_left_fork].unlock(&(ph->d->mutex_forks[ph->nb_mutex_left_fork]));
+	ph->d->mutex_forks[ph->nb_mutex_right_fork].unlock(&(ph->d->mutex_forks[ph->nb_mutex_right_fork]));
 }
 // 
 // void	take_forks(t_philo *ph)
@@ -18,21 +18,28 @@ void	put_fork(t_philo *ph)
 // }
 //m.lock(m);
 
-void	take_forks(t_philo *ph)
+void	take_forks_eat_put_forks(t_philo *ph)
 {
 	long int	time;
-	int			nb_mutex_fork;
 
-	nb_mutex_fork = ph->id - 1;
-	if (nb_mutex_fork == 0)
+	ph->d->mutex_forks[ph->nb_mutex_left_fork].lock(&(ph->d->mutex_forks[ph->nb_mutex_left_fork]));
+	if (ph->d->mutex_forks[ph->nb_mutex_right_fork].mutex_lock)
 	{
-		
+		ph->d->mutex_forks[ph->nb_mutex_left_fork].unlock(&(ph->d->mutex_forks[ph->nb_mutex_left_fork]));
+		usleep(50);
+		take_forks_eat_put_forks(ph);
 	}
-	ph->d->mutex_forks[ph->id - 1].lock(ph->d->mutex_forks[ph->id - 1]);
-	time = ft_gettime(ph);
-	if (time != -1)
+	else
 	{
-		print_status(ph, time / 1000, MESS_FORK);
+		ph->d->mutex_forks[ph->nb_mutex_right_fork].lock(&(ph->d->mutex_forks[ph->nb_mutex_right_fork]));
+		time = ft_gettime(ph);
+		if (time != -1)
+		{
+			print_status(ph, time / 1000, MESS_FORK);
+			print_status(ph, time / 1000, MESS_FORK);
+			ft_eat(ph);
+			put_fork(ph);
+		}
 	}
 }
 
@@ -49,20 +56,17 @@ void	ft_eat(t_philo *ph)
 	ph->eat_end_time = ft_gettime(ph);
 }
 
-void	eat_or_died(t_philo *ph)
-{
-	take_forks(ph);
-	ft_eat(ph);
-	put_fork(ph);
-}
-
 void	*philosopher(void *ph)
 {
-	int	i;
-	i = ((t_philo *)ph)->id;
+	((t_philo *)ph)->nb_mutex_right_fork = ((t_philo *)ph)->id - 1;
+	if (((t_philo *)ph)->nb_mutex_right_fork == 0)
+		((t_philo *)ph)->nb_mutex_left_fork = ((t_philo *)ph)->d->nb_philo - 1;
+	else
+		((t_philo *)ph)->nb_mutex_left_fork = ((t_philo *)ph)->id - 2;
+write(1, "test \n", 6);
 	while (1)
 	{
-		eat_or_died((t_philo *)ph);
+		take_forks_eat_put_forks(ph);
 		ft_sleep((t_philo *)ph);
 		ft_think((t_philo *)ph);
 	}

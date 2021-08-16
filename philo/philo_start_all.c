@@ -32,6 +32,7 @@ int	start_all(t_all *all, char **av)
 		all->philo[i].d = (t_data *)malloc(sizeof(t_data) * 1);
 		all->philo[i].d = &all->data;
 		all->philo[i].id = i + 1;
+// printf("id = %d\n", all->philo[i].id);
 	}
 
 	all->data.mutex_forks = (ft_mutex_t *)malloc(sizeof(ft_mutex_t) * all->data.nb_philo);

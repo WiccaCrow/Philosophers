@@ -3,8 +3,8 @@
 void	ft_think(t_philo *ph)
 {
 	long int	time;
-
 	int	i;
+
 	i = ph->id % 6;
 	time = ft_gettime(ph);
 	if (time != -1)

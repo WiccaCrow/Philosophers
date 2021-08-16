@@ -2,14 +2,14 @@
 
 void	ft_mutex_lock(ft_mutex_t *m)
 {
-	m->mutex_lock = 1;
 	pthread_mutex_lock(&m->data);
+	m->mutex_lock = 1;
 }
 
 void	ft_mutex_unlock(ft_mutex_t *m)
 {
-	m->mutex_lock = 0;
 	pthread_mutex_unlock(&m->data);
+	m->mutex_lock = 0;
 }
 
 void	ft_mutex_init(ft_mutex_t *m)

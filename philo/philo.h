@@ -58,7 +58,8 @@ typedef struct	s_philo
 	long int		eat_start_time;
 	struct timeval	tv;
 	t_data			*d;
-	
+	int				nb_mutex_left_fork;
+	int				nb_mutex_right_fork;
 }				t_philo;
 
 typedef struct	s_all
@@ -87,10 +88,10 @@ int			check_time_to_die(t_philo *ph, t_data *d, long int time_current);
 void		*philosopher(void *all);
 long int	ft_gettime_simul_start();
 long int	ft_gettime(t_philo *all);
-void		ft_think(t_philo *all);
-void		ft_sleep(t_philo *all);
+void		take_forks_eat_put_forks(t_philo *all);
 void		ft_eat(t_philo *all);
-// void		ft_died(t_philo *all);
+void		ft_sleep(t_philo *all);
+void		ft_think(t_philo *all);
 void		print_status(t_philo *all, long int timestap_in_ms, char *message);
 
 #endif
