@@ -67,7 +67,6 @@ int	valid_ac(int ac, char **av)
 		i = 0;
 		while (av[nb_arg][i])
 		{
-			++i;
 			while (av[nb_arg][i] != '\0' && av[nb_arg][i] <= 32)
 				++i;
 			while (av[nb_arg][i] && (av[nb_arg][i] >= '0' && av[nb_arg][i] <= '9'))
