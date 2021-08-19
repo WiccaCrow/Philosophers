@@ -11,8 +11,8 @@ void	take_forks_eat_put_forks(t_philo *ph)
 	ph->d->mutex_forks[ph->nb_mutex_left_fork].lock(&(ph->d->mutex_forks[ph->nb_mutex_left_fork]));
 	if (ph->d->mutex_forks[ph->nb_mutex_right_fork].mutex_lock)
 	{
+		usleep(100);
 		ph->d->mutex_forks[ph->nb_mutex_left_fork].unlock(&(ph->d->mutex_forks[ph->nb_mutex_left_fork]));
-		usleep(50);
 		take_forks_eat_put_forks(ph);
 	}
 	else
