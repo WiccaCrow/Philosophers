@@ -54,6 +54,7 @@ typedef struct	s_data
 typedef struct	s_philo
 {
 	int				id;
+	char			*print_color;
 	long int		eat_end_time;
 	long int		eat_start_time;
 	struct timeval	tv;
@@ -73,6 +74,7 @@ void	ft_mutex_init(ft_mutex_t *m);
 void	ft_mutex_unlock(ft_mutex_t *m);
 void	ft_mutex_lock(ft_mutex_t *m);
 
+void			ft_putnbr_fd(long int n, int fd);
 long int		ft_atoi(const char *str);
 int				ft_strlen(const char *s);
 char			*ft_itoa(long int n);

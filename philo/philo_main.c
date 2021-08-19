@@ -13,7 +13,7 @@ int main(int ac, char **av)
 	if (pthread_create(&all.sim_stop, NULL, simulation_stop, (void *)&all))
 		return (i) ;
 	pthread_join(all.sim_stop, NULL);
-	ft_usleep(3000000);
+ft_usleep(3000000);
 	return (0);
 }
 
