@@ -6,7 +6,7 @@ int	start_all(t_all *all, char **av)
 	memset(&all->data, 0, sizeof(t_data));
 	all->data.mutex_die = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	all->data.nb_philo = ft_atoi(av[1]);
-	if (all->data.nb_philo == 0)
+	if (all->data.nb_philo < 1)
 	{
 		(write(STDERR_FILENO, "Error: no one philosopher\n", 26));
 		return (1);

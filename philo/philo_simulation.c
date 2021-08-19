@@ -42,7 +42,10 @@ void	*philosopher(void *ph)
 	while (1)
 	{
 		take_forks_eat_put_forks(ph);
-		ft_sleep((t_philo *)ph);
-		ft_think((t_philo *)ph);
+		// ft_sleep((t_philo *)ph);
+		print_status(ph, 0, MESS_SLEEP);
+		ft_usleep(((t_philo *)ph)->d->time_to_sleep);
+		// ft_think((t_philo *)ph);
+		print_status(ph, 0, MESS_THINK);
 	}
 }
