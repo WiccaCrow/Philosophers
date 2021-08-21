@@ -1,6 +1,6 @@
 NAME		=		philo
 
-CCF			=		gcc $(FLAGS)
+CCF			=		gcc $(CFLAGS)
 # CFLAGS		=		-Wall -Wextra -Werror -lpthread -g -I./
 CFLAGS		=		-Wall -Wextra -Werror -g -I./
 

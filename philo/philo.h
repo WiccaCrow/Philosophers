@@ -49,6 +49,7 @@ typedef struct	s_data
 	long int		died_time;
 	long int		simul_start;
 	// struct timeval	tv;
+	int				sim_stop_int;
 }				t_data;
 
 typedef struct	s_philo

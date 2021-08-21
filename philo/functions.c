@@ -102,17 +102,20 @@ char		*ft_itoa(long int n)
 void	ft_usleep(long int time_stop)
 {
 	long int		time_start;
-	long int		time_last;
+	// long int		time_last;
 	struct timeval	tv;
 
-	time_stop /= 1000;
+	// time_st;
 	gettimeofday(&tv, NULL);
-	time_start = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-	while (tv.tv_sec * 1000 + tv.tv_usec /1000 - time_start < time_stop)
+	time_start = tv.tv_sec * 1000000 + tv.tv_usec;
+	// long int t_st = tv.tv_sec * 1000000 + tv.tv_usec;
+	while (tv.tv_sec * 1000000 + tv.tv_usec - time_start < time_stop)
 	{
-		usleep(50);
+		usleep(100);
 		gettimeofday(&tv, NULL);
 	}
-	if (tv.tv_sec * 1000 + tv.tv_usec /1000 - time_start == time_stop && tv.tv_sec * 1000000 + tv.tv_usec - time_start * 1000 < time_stop * 1000)
-		usleep(tv.tv_sec * 1000000 + tv.tv_usec - time_start * 1000 - time_stop * 1000);
+	// if (tv.tv_sec * 1000 + tv.tv_usec /1000 - time_start == time_stop)
+	// 	if (tv.tv_sec * 1000000 + tv.tv_usec - t_st <= time_stop * 1000)
+	// 		usleep(tv.tv_sec * 1000000 + tv.tv_usec - t_st - time_stop * 1000);
 }
+

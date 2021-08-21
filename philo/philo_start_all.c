@@ -63,5 +63,8 @@ int	start_all(t_all *all, char **av)
 	all->data.time_to_sleep = ft_atoi(av[4]) * 1000;
 	if (av[5])
 		all->data.time_stop_eat = ft_atoi(av[5]);
+
+	all->data.sim_stop_int = 0;
+	
 	return (0);
 }

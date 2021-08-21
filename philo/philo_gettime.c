@@ -17,7 +17,7 @@ long int	ft_gettime_simul_start()
 
 long int	ft_gettime(t_philo *ph)
 {
-	long int	timestap_in_ms;	
+	long int	timestap_in_ms;
 
 	timestap_in_ms = ft_gettime_simul_start();
 	if (timestap_in_ms != -1)
