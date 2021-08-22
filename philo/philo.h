@@ -71,18 +71,15 @@ typedef struct	s_all
 	pthread_t		sim_stop;
 }				t_all;
 
-void	ft_mutex_init(ft_mutex_t *m);
-void	ft_mutex_unlock(ft_mutex_t *m);
-void	ft_mutex_lock(ft_mutex_t *m);
-void	ft_mutex_free(t_all *all);
+void		ft_mutex_init(ft_mutex_t *m);
+void		ft_mutex_unlock(ft_mutex_t *m);
+void		ft_mutex_lock(ft_mutex_t *m);
+void		ft_mutex_free(t_all *all);
 
-void			ft_putnbr_fd(long int n, int fd);
-long int		ft_atoi(const char *str);
-int				ft_strlen(const char *s);
-char			*ft_itoa(long int n);
-char			*ft_strdup(const char *s1);
-void			ft_usleep(long int time_stop);
-// void			exit_clean(t_all *all);
+long int	ft_atoi(const char *str);
+int			ft_strlen(const char *s);
+char		*ft_strdup(const char *s1);
+void		ft_usleep(long int time_stop);
 
 void		ft_clean_all(t_all *all);
 void		ft_clean_all_philo(t_all *all);
@@ -101,16 +98,12 @@ int			init_all_philo(t_all *all, t_philo	**all_philo);
 int			simulation(t_all *all);
 long int	ft_gettime_simul_start();
 void		*philosopher(void *all);
-
-
-
-
+int			take_forks_eat_put_forks(t_philo *all);
+int			take_forks_left(t_philo *ph);
+int			print_status(t_philo *all, long int timestap_in_ms, char *message);
 long int	ft_gettime(t_philo *all);
-void		take_forks_eat_put_forks(t_philo *all);
-void		ft_eat(t_philo *all);
-void		ft_sleep(t_philo *all);
-void		ft_think(t_philo *all);
-void		print_status(t_philo *all, long int timestap_in_ms, char *message);
+int			put_forks(t_philo *ph);
+int			ft_eat(t_philo *all);
 
 void	*simulation_stop(void *all);
 int		check_time_to_die(t_philo *ph, t_data *d, long int time_current);

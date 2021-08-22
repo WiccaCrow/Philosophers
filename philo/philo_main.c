@@ -103,34 +103,3 @@ int	valid_av(char *av)
 	}
 	return (0);
 }
-
-/************************************
- * 		3. simulation				*
- * **********************************
-*/
-/* Description:
- * 		The function run simulation in threads.
- * 
- * Returned value:
- * 		Number of threads.
- * Includes functions:
- * 		3.1. ft_gettime_simul_start;
- * 		3.2. philosopher;
-*/
-
-int	simulation(t_all *all)
-{
-	int			i;
-
-	all->data.simul_start = ft_gettime_simul_start();
-	i = -1;
-	while (++i < all->data.nb_philo)
-	{
-		if (pthread_create(&all->data.ph[i], NULL, philosopher, (void *)&all->philo[i]))
-		{
-			write(STDERR_FILENO, "Error: pthread_create\n", 22);
-			return (i);
-		}
-	}
-	return (i);
-}
