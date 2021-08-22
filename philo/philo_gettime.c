@@ -12,7 +12,7 @@
  * 		If failure -1.
 */
 
-long int	ft_gettime_simul_start()
+long int	ft_gettime_simul_start(void)
 {
 	long int		timestap_in_mcs;
 	struct timeval	*tv;

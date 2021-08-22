@@ -6,7 +6,7 @@ CFLAGS		=		-Wall -Wextra -Werror -g -I./
 
 SRCS		=		philo_main.c philo_initialization.c \
 					philo_simulation.c philo_simulation_stop.c \
-					philo_gettime.c philo_print_status.c \
+					philo_gettime.c philo_simulation_and_print_status.c \
 					functions.c functions_mutex.c \
 					philo_clean_all.c
 OBJS		=		$(SRCS:.c=.o)

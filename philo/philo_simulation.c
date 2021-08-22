@@ -22,7 +22,8 @@ int	simulation(t_all *all)
 	i = -1;
 	while (++i < all->data.nb_philo)
 	{
-		if (pthread_create(&all->data.ph[i], NULL, philosopher, (void *)&all->philo[i]))
+		if (pthread_create(&all->data.ph[i], NULL, philosopher,
+				(void *)&all->philo[i]))
 		{
 			write(STDERR_FILENO, "Error: pthread_create\n", 22);
 			return (i);
@@ -54,14 +55,14 @@ void	*philosopher(void *ph)
 		if (take_forks_eat_put_forks(ph))
 			return (0);
 		if (((t_philo *)ph)->d->sim_stop_int)
-			return 0;
+			return (0);
 		if (print_status(ph, 0, MESS_SLEEP))
-			return 0;
+			return (0);
 		ft_usleep(((t_philo *)ph)->d->time_to_sleep);
 		if (((t_philo *)ph)->d->sim_stop_int)
-			return 0;
+			return (0);
 		if (print_status(ph, 0, MESS_THINK))
-			return 0;
+			return (0);
 	}
 }
 
@@ -82,7 +83,7 @@ void	*philosopher(void *ph)
 
 int	take_forks_eat_put_forks(t_philo *ph)
 {
-	while (1) 
+	while (1)
 	{
 		if (!ph->d->sim_stop_int && take_forks_left(ph))
 			continue ;
@@ -121,13 +122,13 @@ int	take_forks_eat_put_forks(t_philo *ph)
 
 int	take_forks_left(t_philo *ph)
 {
-	ph->d->mutex_forks[ph->nb_mutex_left_fork].lock(&(ph->d->mutex_forks\
-		[ph->nb_mutex_left_fork]));
+	ph->d->mutex_forks[ph->nb_mutex_left_fork].lock \
+	(&(ph->d->mutex_forks[ph->nb_mutex_left_fork]));
 	if (ph->d->mutex_forks[ph->nb_mutex_right_fork].mutex_lock)
 	{
 		usleep(100);
-		ph->d->mutex_forks[ph->nb_mutex_left_fork].unlock(&(ph->d->mutex_forks\
-			[ph->nb_mutex_left_fork]));
+		ph->d->mutex_forks[ph->nb_mutex_left_fork]. \
+		unlock(&(ph->d->mutex_forks[ph->nb_mutex_left_fork]));
 		return (1);
 	}
 	return (0);
@@ -144,26 +145,9 @@ int	take_forks_left(t_philo *ph)
 
 int	put_forks(t_philo *ph)
 {
-	ph->d->mutex_forks[ph->nb_mutex_left_fork].unlock(&(ph->d->mutex_forks[ph->nb_mutex_left_fork]));
-	ph->d->mutex_forks[ph->nb_mutex_right_fork].unlock(&(ph->d->mutex_forks[ph->nb_mutex_right_fork]));
+	ph->d->mutex_forks[ph->nb_mutex_left_fork]. \
+	unlock(&(ph->d->mutex_forks[ph->nb_mutex_left_fork]));
+	ph->d->mutex_forks[ph->nb_mutex_right_fork]. \
+	unlock(&(ph->d->mutex_forks[ph->nb_mutex_right_fork]));
 	return (1);
 }
-
-/********************************************
- * 		3.2.1.4. ft_eat						*
- * ******************************************
-*/
-/* Description:
- * 		The function simulates in philosophers life:
- * 		eat.
-*/
-
-int	ft_eat(t_philo *ph)
-{
-	if (print_status(ph, 1, MESS_EAT))
-			return (1);
-	ft_usleep(ph->d->time_to_eat);
-	// ph->eat_end_time = ft_gettime(ph);
-	return (ph->d->sim_stop_int);
-}
-

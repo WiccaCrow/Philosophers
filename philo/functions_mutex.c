@@ -12,12 +12,12 @@
  * 		2.1.2.2. ft_mutex_unlock;
 */
 
-void	ft_mutex_init(ft_mutex_t *m)
+void	ft_mutex_init(t_ft_mutex_t *m)
 {
 	m->mutex_lock = 0;
-	m->self = m;
+	// m->self = m;
 	m->lock = &ft_mutex_lock;
-	m->unlock = &ft_mutex_unlock; 
+	m->unlock = &ft_mutex_unlock;
 	pthread_mutex_init(&m->data, 0);
 }
 
@@ -29,7 +29,7 @@ void	ft_mutex_init(ft_mutex_t *m)
  * 		The function lock mutex (use for forks mutex).
 */
 
-void	ft_mutex_lock(ft_mutex_t *m)
+void	ft_mutex_lock(t_ft_mutex_t *m)
 {
 	pthread_mutex_lock(&m->data);
 	m->mutex_lock = 1;
@@ -43,7 +43,7 @@ void	ft_mutex_lock(ft_mutex_t *m)
  * 		The function unlock mutex (use for forks mutex).
 */
 
-void	ft_mutex_unlock(ft_mutex_t *m)
+void	ft_mutex_unlock(t_ft_mutex_t *m)
 {
 	pthread_mutex_unlock(&m->data);
 	m->mutex_lock = 0;

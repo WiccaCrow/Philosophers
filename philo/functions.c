@@ -22,19 +22,13 @@ long int	ft_atoi(const char *str)
 	i = 0;
 	sign = 1;
 	n = 0;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' ||
-			str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
-		i++;
-	str[i] == '+' && str[i + 1] != '-' ? i++ : 0;
-	str[i] == '-' ? sign = -1 : 0;
-	str[i] == '-' ? i++ : 0;
 	while (str[i] == '0')
 		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 		n = n * 10 + (str[i++] - '0');
 	if (n > 9223372036854775807)
-		return (sign == -1 ? 0 : -1);
-	return (sign == -1 ? n = -n : n);
+		return (-1);
+	return (n);
 }
 
 /************************************
@@ -57,7 +51,8 @@ char	*ft_strdup(const char *s1)
 	int		len;
 
 	len = ft_strlen(s1);
-	if ((c_copy = malloc((len + 1) * sizeof(char))) == 0)
+	c_copy = malloc((len + 1) * sizeof(char));
+	if (c_copy == 0)
 		return (NULL);
 	c_copy[len] = 0;
 	while (len--)
@@ -110,4 +105,3 @@ void	ft_usleep(long int time_stop)
 		gettimeofday(&tv, NULL);
 	}
 }
-

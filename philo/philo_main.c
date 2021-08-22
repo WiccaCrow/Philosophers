@@ -13,11 +13,11 @@
  * 		6. ft_clean_all;
 */
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_all			all;
-	int				i;
-	
+	t_all	all;
+	int		i;
+
 	if (valid_ac_av(ac, av))
 		return (2);
 	if (initialization(&all, av))
@@ -25,7 +25,7 @@ int main(int ac, char **av)
 	i = 0;
 	i = simulation(&all);
 	if (pthread_create(&all.sim_stop, NULL, simulation_stop, (void *)&all))
-			return (i);
+		return (i);
 	pthread_join(all.sim_stop, 0);
 	while (i > -1)
 		pthread_join(all.data.ph[i--], NULL);
@@ -97,8 +97,9 @@ int	valid_av(char *av)
 		{
 			while (av[i] && av[i] <= 32)
 				++i;
-			if (av[i])				
-				return (write(STDERR_FILENO, "Error: arguments must be a number\n", 34));
+			if (av[i])
+				return (write(STDERR_FILENO,
+						"Error: arguments must be a number\n", 34));
 		}
 	}
 	return (0);

@@ -54,7 +54,8 @@ int	init_all_data(t_data *data, char **av)
 	data->ph = (pthread_t *)malloc(sizeof(pthread_t) * data->nb_philo);
 	if (!data->ph)
 		return (write(STDERR_FILENO, "Error: malloc error\n", 20));
-	data->mutex_forks = (ft_mutex_t *)malloc(sizeof(ft_mutex_t) * data->nb_philo);
+	data->mutex_forks = (t_ft_mutex_t *)malloc(sizeof(t_ft_mutex_t)
+			* data->nb_philo);
 	data->mutex_die = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	i = -1;
 	while (++i < data->nb_philo)
@@ -143,8 +144,8 @@ int	init_all_data_colors(t_data *data)
 
 int	init_all_philo(t_all *all, t_philo	**all_philo)
 {
-	int	i;
-	int	i_col;
+	int		i;
+	int		i_col;
 	t_philo	*philo;
 
 	philo = (t_philo *)malloc(sizeof(t_philo) * all->data.nb_philo);

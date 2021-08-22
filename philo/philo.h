@@ -14,7 +14,6 @@
 # define MESS_THINK " is thinking"
 # define MESS_DIED " died"
 
-# define MASS (1 ,2, 3)
 # define ANSI_COLOR_RED     "\x1b[31m"
 # define ANSI_COLOR_GREEN   "\x1b[32m"
 # define ANSI_COLOR_YELLOW  "\x1b[33m"
@@ -23,57 +22,53 @@
 # define ANSI_COLOR_CYAN    "\x1b[36m"
 # define ANSI_COLOR_RESET   "\x1b[0m"
 
-typedef struct	s_ft_mutex
+typedef pthread_mutex_t	t_mtx;
+
+typedef struct s_ft_mutex
 {
-	pthread_mutex_t		data;
-	// atomic int			mutex_lock;
-	int			mutex_lock;
-	struct s_ft_mutex	*self;
+	t_mtx	data;
+	int		mutex_lock;
+	void (*lock)(struct s_ft_mutex *self);
+	void (*unlock)(struct s_ft_mutex *self);
+}				t_ft_mutex_t;
 
-	void				(*lock)(struct s_ft_mutex *self);
-	void				(*unlock)(struct s_ft_mutex *self);
-}				ft_mutex_t;
-
-typedef struct	s_data
+typedef struct s_data
 {
 	pthread_t		*ph;
 	pthread_mutex_t	mutex_die;
-	ft_mutex_t		*mutex_forks;
+	t_ft_mutex_t	*mutex_forks;
 	int				nb_philo;
 	long int		time_to_die;
 	long int		time_to_eat;
 	long int		time_to_sleep;
 	long int		time_stop_eat;
 	char			**colors;
-	int				died;
-	long int		died_time;
 	long int		simul_start;
-	// struct timeval	tv;
 	int				sim_stop_int;
 }				t_data;
 
-typedef struct	s_philo
+typedef struct s_philo
 {
 	int				id;
 	char			*print_color;
-	long int		eat_end_time;
-	long int		eat_start_time;
-	struct timeval	tv;
-	t_data			*d;
 	int				nb_mutex_left_fork;
 	int				nb_mutex_right_fork;
+	long int		eat_start_time;
+	int				eat_nb;
+	struct timeval	tv;
+	t_data			*d;
 }				t_philo;
 
-typedef struct	s_all
+typedef struct s_all
 {
 	t_data			data;
 	t_philo			*philo;
 	pthread_t		sim_stop;
 }				t_all;
 
-void		ft_mutex_init(ft_mutex_t *m);
-void		ft_mutex_unlock(ft_mutex_t *m);
-void		ft_mutex_lock(ft_mutex_t *m);
+void		ft_mutex_init(t_ft_mutex_t *m);
+void		ft_mutex_unlock(t_ft_mutex_t *m);
+void		ft_mutex_lock(t_ft_mutex_t *m);
 void		ft_mutex_free(t_all *all);
 
 long int	ft_atoi(const char *str);
@@ -96,7 +91,7 @@ int			init_all_data_colors(t_data *data);
 int			init_all_philo(t_all *all, t_philo	**all_philo);
 
 int			simulation(t_all *all);
-long int	ft_gettime_simul_start();
+long int	ft_gettime_simul_start(void);
 void		*philosopher(void *all);
 int			take_forks_eat_put_forks(t_philo *all);
 int			take_forks_left(t_philo *ph);
@@ -105,7 +100,8 @@ long int	ft_gettime(t_philo *all);
 int			put_forks(t_philo *ph);
 int			ft_eat(t_philo *all);
 
-void	*simulation_stop(void *all);
-int		check_time_to_die(t_philo *ph, t_data *d, long int time_current);
+void		*simulation_stop(void *all);
+int			check_time_to_die(t_philo *ph, t_data *d, long int time_current);
+int			check_stop_eat(t_all *all, int nb_max_eat);
 
 #endif
