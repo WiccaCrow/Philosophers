@@ -12,6 +12,8 @@ long int	ft_gettime_simul_start()
 		return (-1);
 	}
 	timestap_in_mcs = tv->tv_sec * 1000000 + tv->tv_usec;
+	free(tv);
+	tv = NULL;
 	return (timestap_in_mcs);
 }
 

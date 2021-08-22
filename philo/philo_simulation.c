@@ -47,39 +47,12 @@ void	take_forks_eat_put_forks(t_philo *ph)
 	}
 }
 
-// void	take_forks_eat_put_forks(t_philo *ph)
-// {
-// 	ph->d->mutex_forks[ph->nb_mutex_left_fork].lock(&(ph->d->mutex_forks[ph->nb_mutex_left_fork]));
-// 	if (ph->d->mutex_forks[ph->nb_mutex_right_fork].mutex_lock)
-// 	{
-// 		// ft_usleep(10000);
-// 		usleep(100);
-// 		ph->d->mutex_forks[ph->nb_mutex_left_fork].unlock(&(ph->d->mutex_forks[ph->nb_mutex_left_fork]));
-// 		take_forks_eat_put_forks(ph);
-// 	}
-// 	else
-// 	{
-// 		ph->d->mutex_forks[ph->nb_mutex_right_fork].lock(&(ph->d->mutex_forks[ph->nb_mutex_right_fork]));
-// 		print_status(ph, 0, MESS_FORK);
-// 		if (ph->d->sim_stop_int)
-// 			return ;
-// 		print_status(ph, 0, MESS_FORK);
-// 		if (ph->d->sim_stop_int)
-// 			return ;
-// 		ft_eat(ph);
-// 		if (ph->d->sim_stop_int)
-// 			return ;
-// 		put_fork(ph);
-// 	}
-// }
-
 void	ft_eat(t_philo *ph)
 {
 	print_status(ph, 1, MESS_EAT);
 	if (ph->d->sim_stop_int)
 			return ;
 	ft_usleep(ph->d->time_to_eat);
-	// printf("here\n");
 	// ph->eat_end_time = ft_gettime(ph);
 }
 

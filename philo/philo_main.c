@@ -1,52 +1,41 @@
 #include "philo.h"
 
-// void	ft_mutex_free(t_all *all)
-// {
-// 	pthread_mutex_init
-// }
+/************************************
+ * 		main						*
+ * **********************************
+*/
+/* Includes functions:
+ * 		1. valid_ac_av;
+ * 		2. initialization;
+ * 		3. simulation;
+ * 		4. simulation_stop;
+ * 		5. ft_mutex_free;
+ * 		6. ft_clean_all;
+*/
 
 int main(int ac, char **av)
 {
 	t_all			all;
-	int				i = 0;
-
-	if (valid_ac(ac, av))
+	int				i;
+	
+	if (valid_ac_av(ac, av))
 		return (2);
-	if (start_all(&all, av))
+	if (initialization(&all, av))
 		return (1);
-printf("test main\n");
+	i = 0;
 	i = simulation(&all);
 	if (pthread_create(&all.sim_stop, NULL, simulation_stop, (void *)&all))
 			return (i);
 	pthread_join(all.sim_stop, 0);
-	
 	while (i > -1)
 		pthread_join(all.data.ph[i--], NULL);
-	// ft_usleep(3000000);
-	// ft_mutex_free(&all);=
+	ft_mutex_free(&all);
+	ft_clean_all(&all);
 	return (0);
 }
 
-int	simulation(t_all *all)
-{
-	int			i;
-	// pthread_t	wea;
-
-	all->data.simul_start = ft_gettime_simul_start();
-	i = -1;
-	while (++i < all->data.nb_philo)
-	{
-		if (pthread_create(&all->data.ph[i], NULL, philosopher, (void *)&all->philo[i]))
-		{
-			write(STDERR_FILENO, "Error: pthread_create\n", 22);
-			return (i);
-		}
-		// pthread_detach(all->data.ph[i]);
-	}
-	return (i);
-}
 /************************************
- * 				valid_ac			*
+ * 		1. valid_ac_av				*
  * **********************************
 */
 /* Description:
@@ -58,35 +47,90 @@ int	simulation(t_all *all)
  * Returned value:
  * 		If the arguments are valid, 0.
  * 		Otherwise, 1.
+ * Includes functions:
+ * 		1.1. valid_av;
 */
 
-int	valid_ac(int ac, char **av)
+int	valid_ac_av(int ac, char **av)
 {
 	int	nb_arg;
-	int	i;
 
 	if (ac < 5 || ac > 6)
 		return (write(STDERR_FILENO, "Error: wrong number of arguments\n", 33));
 	nb_arg = 0;
 	while (av[++nb_arg])
 	{
-		if (av[nb_arg][0] == '\0')
-			return (write(STDERR_FILENO, "Error: arguments must be a number\n", 34));
-		i = 0;
-		while (av[nb_arg][i])
+		if (valid_av(av[nb_arg]))
+			return (1);
+	}
+	return (0);
+}
+
+/************************************
+ * 		1.1. valid_av				*
+ * **********************************
+*/
+/* Description:
+ * 		The function checks the entered 
+ * 		arguments for validity.
+ * 		Arguments must be numbers.
+ * 
+ * Returned value:
+ * 		If the arguments are valid, 0.
+ * 		Otherwise, 1.
+*/
+
+int	valid_av(char *av)
+{
+	int	i;
+
+	if (av[0] == '\0')
+		return (write(STDERR_FILENO, "Error: arguments must be a number\n", 34));
+	i = 0;
+	while (av[i])
+	{
+		while (av[i] != '\0' && av[i] <= 32)
+			++i;
+		while (av[i] && (av[i] >= '0' && av[i] <= '9'))
+			++i;
+		if (av[i] && (av[i] < '0' || av[i] > '9'))
 		{
-			while (av[nb_arg][i] != '\0' && av[nb_arg][i] <= 32)
+			while (av[i] && av[i] <= 32)
 				++i;
-			while (av[nb_arg][i] && (av[nb_arg][i] >= '0' && av[nb_arg][i] <= '9'))
-				++i;
-			if (av[nb_arg][i] && (av[nb_arg][i] < '0' || av[nb_arg][i] > '9'))
-			{
-				while (av[nb_arg][i] && av[nb_arg][i] <= 32)
-					++i;
-				if (av[nb_arg][i])				
-					return (write(STDERR_FILENO, "Error: arguments must be a number\n", 34));
-			}
+			if (av[i])				
+				return (write(STDERR_FILENO, "Error: arguments must be a number\n", 34));
 		}
 	}
 	return (0);
+}
+
+/************************************
+ * 		3. simulation				*
+ * **********************************
+*/
+/* Description:
+ * 		The function run simulation in threads.
+ * 
+ * Returned value:
+ * 		Number of threads.
+ * Includes functions:
+ * 		3.1. ft_gettime_simul_start;
+ * 		3.2. philosopher;
+*/
+
+int	simulation(t_all *all)
+{
+	int			i;
+
+	all->data.simul_start = ft_gettime_simul_start();
+	i = -1;
+	while (++i < all->data.nb_philo)
+	{
+		if (pthread_create(&all->data.ph[i], NULL, philosopher, (void *)&all->philo[i]))
+		{
+			write(STDERR_FILENO, "Error: pthread_create\n", 22);
+			return (i);
+		}
+	}
+	return (i);
 }

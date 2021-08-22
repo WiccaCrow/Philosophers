@@ -21,11 +21,24 @@ void	ft_putnbr_fd(long int n, int fd)
 	}
 }
 
+/************************************
+ * 		2.1.1.1. ft_atoi			*
+ * **********************************
+*/
+/* Description:
+ * 		self atoi (man atoi). Convert string to number.
+ * 
+ * Returned value:
+ * 		Number.
+ * Includes functions:
+ * 		2.1.1.1. ft_atoi;
+*/
+
 long int	ft_atoi(const char *str)
 {
-	int					i;
+	int			i;
 	long int	n;
-	int					sign;
+	int			sign;
 
 	i = 0;
 	sign = 1;
@@ -43,6 +56,33 @@ long int	ft_atoi(const char *str)
 	if (n > 9223372036854775807)
 		return (sign == -1 ? 0 : -1);
 	return (sign == -1 ? n = -n : n);
+}
+
+/************************************
+ * 		2.1.3.1. ft_strdup			*
+ * **********************************
+*/
+/* Description:
+ * 		self strdup (man strdup). Do strings copy.
+ * 
+ * Returned value:
+ * 		New string. Need to free.
+*/
+
+char	*ft_strdup(const char *s1)
+{
+	char	*c_copy;
+	int		len;
+
+	len = ft_strlen(s1);
+	if ((c_copy = malloc((len + 1) * sizeof(char))) == 0)
+		return (NULL);
+	c_copy[len] = 0;
+	while (len--)
+	{
+		c_copy[len] = s1[len];
+	}
+	return (c_copy);
 }
 
 int	ft_strlen(const char *s)

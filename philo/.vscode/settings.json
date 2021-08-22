@@ -3,6 +3,7 @@
     "philo.h": "c",
     "stdlib.h": "c"
   },
+  "editor.rulers": [80],
   "C_Cpp_Runner.cCompilerPath": "/usr/bin/gcc",
   "C_Cpp_Runner.cppCompilerPath": "/usr/bin/g++",
   "C_Cpp_Runner.debuggerPath": "/usr/bin/gdb",
