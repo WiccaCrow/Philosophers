@@ -15,7 +15,8 @@ int	print_status(t_philo *ph, long int does_eat, char *message)
 {
 	long int	timestap_in_ms;
 
-	if (!ph->d->sim_stop_int && !pthread_mutex_lock(&(ph->d->mutex_die)))
+	if (!ph->d->sim_stop_int && !pthread_mutex_lock(&(ph->d->mutex_die))
+		&& !ph->d->sim_stop_int)
 	{
 		timestap_in_ms = ft_gettime(ph);
 		if (does_eat)
