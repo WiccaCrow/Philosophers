@@ -19,13 +19,15 @@ void	*simulation_stop(void *all)
 	long int	time_current;
 	int			nb_max_eat;
 
+time_current = 0;
 	while (1)
 	{
 		nb_max_eat = 0;
 		i = -1;
 		while (++i < ((t_all *)all)->data.nb_philo)
 		{
-			time_current = ft_gettime(((t_all *)all)->philo);
+			// time_current = ft_gettime(&((t_all *)all)->philo[i]);
+			time_current = ft_gettime_simul_start() - ((t_all *)all)->data.simul_start;
 			if (2 == check_time_to_die(&((t_all *)all)->philo[i],
 					&((t_all *)all)->data, time_current))
 				return (0);
@@ -51,7 +53,10 @@ void	*simulation_stop(void *all)
 int	check_time_to_die(t_philo *ph, t_data *d, long int time_current)
 {
 	pthread_mutex_lock(&d->mutex_die);
-	if ((time_current - ph->eat_start_time) / 1000 > d->time_to_die / 1000)
+	// time_current = ft_gettime(ph);
+	if ((time_current 
+	- ph->eat_start_time) / 1000 > 
+	d->time_to_die / 1000)
 	{
 		d->sim_stop_int = 1;
 		printf("%s%ld %d%s%s\n", ph->print_color, time_current / 1000, ph->id,

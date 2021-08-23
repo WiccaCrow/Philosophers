@@ -28,15 +28,15 @@ typedef struct s_ft_mutex
 {
 	t_mtx	data;
 	int		mutex_lock;
-	void (*lock)(struct s_ft_mutex *self);
-	void (*unlock)(struct s_ft_mutex *self);
-}				t_ft_mutex_t;
+	// void (*lock)(struct s_ft_mutex *self);
+	// void (*unlock)(struct s_ft_mutex *self);
+}				t_mutex;
 
 typedef struct s_data
 {
 	pthread_t		*ph;
 	pthread_mutex_t	mutex_die;
-	t_ft_mutex_t	*mutex_forks;
+	t_mutex			*mutex_forks;
 	int				nb_philo;
 	long int		time_to_die;
 	long int		time_to_eat;
@@ -66,9 +66,9 @@ typedef struct s_all
 	pthread_t		sim_stop;
 }				t_all;
 
-void		ft_mutex_init(t_ft_mutex_t *m);
-void		ft_mutex_unlock(t_ft_mutex_t *m);
-void		ft_mutex_lock(t_ft_mutex_t *m);
+void		ft_mutex_init(t_mutex *m);
+void		ft_mutex_unlock(t_mutex *m);
+void		ft_mutex_lock(t_mutex *m);
 void		ft_mutex_free(t_all *all);
 
 long int	ft_atoi(const char *str);
@@ -95,8 +95,8 @@ long int	ft_gettime_simul_start(void);
 void		*philosopher(void *all);
 int			take_forks_eat_put_forks(t_philo *all);
 int			take_forks_left(t_philo *ph);
-int			print_status(t_philo *all, long int timestap_in_ms, char *message);
-long int	ft_gettime(t_philo *all);
+int			print_status(t_philo *ph, long int timestap_in_ms, char *message);
+long int	ft_gettime(t_philo *ph);
 int			put_forks(t_philo *ph);
 int			ft_eat(t_philo *all);
 

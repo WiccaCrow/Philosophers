@@ -27,8 +27,8 @@ int	main(int ac, char **av)
 	if (pthread_create(&all.sim_stop, NULL, simulation_stop, (void *)&all))
 		return (i);
 	pthread_join(all.sim_stop, 0);
-	while (i > -1)
-		pthread_join(all.data.ph[i--], NULL);
+	while (i-- > 0)
+		pthread_join(all.data.ph[i], NULL);
 	ft_mutex_free(&all);
 	ft_clean_all(&all);
 	return (0);

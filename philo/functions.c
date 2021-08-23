@@ -17,10 +17,8 @@ long int	ft_atoi(const char *str)
 {
 	int			i;
 	long int	n;
-	int			sign;
 
 	i = 0;
-	sign = 1;
 	n = 0;
 	while (str[i] == '0')
 		i++;
@@ -54,7 +52,7 @@ char	*ft_strdup(const char *s1)
 	c_copy = malloc((len + 1) * sizeof(char));
 	if (c_copy == 0)
 		return (NULL);
-	c_copy[len] = 0;
+	c_copy[len] = '\0';
 	while (len--)
 	{
 		c_copy[len] = s1[len];

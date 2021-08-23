@@ -41,8 +41,8 @@ void	ft_clean_all_data(t_data *data)
 	ft_free((void **)&data->ph);
 	ft_free((void **)&data->mutex_forks);
 	i = 7;
-	while (data->colors[i--])
-		ft_free((void **)data->colors[i]);
+	while (i--)
+		ft_free((void **)&data->colors[i]);
 	free(data->colors);
 	data->colors = NULL;
 }

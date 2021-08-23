@@ -89,8 +89,7 @@ int	take_forks_eat_put_forks(t_philo *ph)
 			continue ;
 		else if (!ph->d->sim_stop_int)
 		{
-			ph->d->mutex_forks[ph->nb_mutex_right_fork].\
-				lock(&(ph->d->mutex_forks[ph->nb_mutex_right_fork]));
+			ft_mutex_lock(&ph->d->mutex_forks[ph->nb_mutex_right_fork]);
 			if (print_status(ph, 0, MESS_FORK))
 				return (put_forks(ph));
 			if (print_status(ph, 0, MESS_FORK))
@@ -122,13 +121,11 @@ int	take_forks_eat_put_forks(t_philo *ph)
 
 int	take_forks_left(t_philo *ph)
 {
-	ph->d->mutex_forks[ph->nb_mutex_left_fork].lock \
-	(&(ph->d->mutex_forks[ph->nb_mutex_left_fork]));
+	ft_mutex_lock(&ph->d->mutex_forks[ph->nb_mutex_left_fork]);
 	if (ph->d->mutex_forks[ph->nb_mutex_right_fork].mutex_lock)
 	{
 		usleep(100);
-		ph->d->mutex_forks[ph->nb_mutex_left_fork]. \
-		unlock(&(ph->d->mutex_forks[ph->nb_mutex_left_fork]));
+		ft_mutex_unlock(&ph->d->mutex_forks[ph->nb_mutex_left_fork]);
 		return (1);
 	}
 	return (0);
@@ -145,9 +142,7 @@ int	take_forks_left(t_philo *ph)
 
 int	put_forks(t_philo *ph)
 {
-	ph->d->mutex_forks[ph->nb_mutex_left_fork]. \
-	unlock(&(ph->d->mutex_forks[ph->nb_mutex_left_fork]));
-	ph->d->mutex_forks[ph->nb_mutex_right_fork]. \
-	unlock(&(ph->d->mutex_forks[ph->nb_mutex_right_fork]));
+	ft_mutex_unlock(&ph->d->mutex_forks[ph->nb_mutex_left_fork]);
+	ft_mutex_unlock(&ph->d->mutex_forks[ph->nb_mutex_right_fork]);
 	return (1);
 }

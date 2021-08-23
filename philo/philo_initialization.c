@@ -54,9 +54,13 @@ int	init_all_data(t_data *data, char **av)
 	data->ph = (pthread_t *)malloc(sizeof(pthread_t) * data->nb_philo);
 	if (!data->ph)
 		return (write(STDERR_FILENO, "Error: malloc error\n", 20));
-	data->mutex_forks = (t_ft_mutex_t *)malloc(sizeof(t_ft_mutex_t)
+	data->mutex_forks = (t_mutex *)malloc(sizeof(t_mutex)
 			* data->nb_philo);
-	data->mutex_die = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
+	i = data->nb_philo;
+	while (i--)
+		pthread_mutex_init(&data->mutex_forks[i].data, 0);
+	// data->mutex_die = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
+	pthread_mutex_init(&data->mutex_die, 0);
 	i = -1;
 	while (++i < data->nb_philo)
 		ft_mutex_init(&data->mutex_forks[i]);
@@ -159,6 +163,7 @@ int	init_all_philo(t_all *all, t_philo	**all_philo)
 		philo[i].id = i + 1;
 		i_col = philo[i].id % 6;
 		philo[i].print_color = all->data.colors[i_col];
+		philo[i].eat_nb = 0;
 	}
 	*all_philo = philo;
 	return (0);
