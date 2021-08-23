@@ -59,8 +59,7 @@ int	init_all_data(t_data *data, char **av)
 	i = data->nb_philo;
 	while (i--)
 		pthread_mutex_init(&data->mutex_forks[i].data, 0);
-	// data->mutex_die = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
-	pthread_mutex_init(&data->mutex_die, 0);
+	data->mutex_die = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 	i = -1;
 	while (++i < data->nb_philo)
 		ft_mutex_init(&data->mutex_forks[i]);
@@ -164,6 +163,7 @@ int	init_all_philo(t_all *all, t_philo	**all_philo)
 		i_col = philo[i].id % 6;
 		philo[i].print_color = all->data.colors[i_col];
 		philo[i].eat_nb = 0;
+		philo[i].eat_start_time = 0;
 	}
 	*all_philo = philo;
 	return (0);

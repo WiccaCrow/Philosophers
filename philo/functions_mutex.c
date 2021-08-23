@@ -15,8 +15,6 @@
 void	ft_mutex_init(t_mutex *m)
 {
 	m->mutex_lock = 0;
-	// m->lock = &ft_mutex_lock;
-	// m->unlock = &ft_mutex_unlock;
 	pthread_mutex_init(&m->data, 0);
 }
 

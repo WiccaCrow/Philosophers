@@ -28,8 +28,6 @@ typedef struct s_ft_mutex
 {
 	t_mtx	data;
 	int		mutex_lock;
-	// void (*lock)(struct s_ft_mutex *self);
-	// void (*unlock)(struct s_ft_mutex *self);
 }				t_mutex;
 
 typedef struct s_data
