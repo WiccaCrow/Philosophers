@@ -1,7 +1,8 @@
 {
   "files.associations": {
     "philo.h": "c",
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "philo_sem.h": "c"
   },
   "editor.rulers": [80],
   "C_Cpp_Runner.cCompilerPath": "/usr/bin/gcc",

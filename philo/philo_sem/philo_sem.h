@@ -7,6 +7,9 @@
 # include<string.h>
 # include<sys/time.h>
 # include <pthread.h>
+# include <fcntl.h>
+# include <sys/stat.h>
+# include <semaphore.h>
 
 # define MESS_FORK " has taken a fork"
 # define MESS_EAT " is eating"
@@ -22,19 +25,20 @@
 # define ANSI_COLOR_CYAN    "\x1b[36m"
 # define ANSI_COLOR_RESET   "\x1b[0m"
 
-typedef pthread_mutex_t	t_mtx;
+# define SEM_DIE "sem_die"
+# define SEM_FORK "sem_fork"
 
-typedef struct s_ft_mutex
+typedef struct s_ft_sem
 {
-	t_mtx	data;
-	int		mutex_lock;
-}				t_mutex;
+	sem_t	*data;
+	int		sem_up;
+}				t_sem;//t_mutex
 
 typedef struct s_data
 {
 	pthread_t		*ph;
-	pthread_mutex_t	mutex_die;
-	t_mutex			*mutex_forks;
+	sem_t			*sem_die;
+	t_sem			*sem_forks;
 	int				nb_philo;
 	long int		time_to_die;
 	long int		time_to_eat;
@@ -49,8 +53,8 @@ typedef struct s_philo
 {
 	int				id;
 	char			*print_color;
-	int				nb_mutex_left_fork;
-	int				nb_mutex_right_fork;
+	// int				nb_mutex_left_fork;
+	// int				nb_mutex_right_fork;
 	long int		eat_start_time;
 	int				eat_nb;
 	struct timeval	tv;
@@ -64,10 +68,9 @@ typedef struct s_all
 	pthread_t		sim_stop;
 }				t_all;
 
-void		ft_mutex_init(t_mutex *m);
-void		ft_mutex_unlock(t_mutex *m);
-void		ft_mutex_lock(t_mutex *m);
-void		ft_mutex_free(t_all *all);
+void	ft_sem_down(t_sem *sem_forks);
+void	ft_sem_up(t_sem *sem_forks);
+void	ft_sem_free(t_all *all);
 
 long int	ft_atoi(const char *str);
 int			ft_strlen(const char *s);
@@ -92,7 +95,7 @@ int			simulation(t_all *all);
 long int	ft_gettime_simul_start(void);
 void		*philosopher(void *all);
 int			take_forks_eat_put_forks(t_philo *all);
-int			take_forks_left(t_philo *ph);
+void		take_forks(t_philo *ph);
 int			print_status(t_philo *ph, long int timestap_in_ms, char *message);
 long int	ft_gettime(t_philo *ph);
 int			put_forks(t_philo *ph);

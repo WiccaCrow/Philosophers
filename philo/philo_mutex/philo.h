@@ -22,11 +22,9 @@
 # define ANSI_COLOR_CYAN    "\x1b[36m"
 # define ANSI_COLOR_RESET   "\x1b[0m"
 
-typedef pthread_mutex_t	t_mtx;
-
 typedef struct s_ft_mutex
 {
-	t_mtx	data;
+	pthread_mutex_t	data;
 	int		mutex_lock;
 }				t_mutex;
 

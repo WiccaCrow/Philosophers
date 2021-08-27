@@ -12,7 +12,11 @@ SRC_MUTEX		=	philo_main.c philo_initialization.c \
 					philo_clean_all.c
 
 FOLDER_SEM	=		./philo_sem/
-SRC_SEM		=		philo_main.c
+SRC_SEM		=		philo_main.c philo_initialization.c \
+					philo_simulation.c philo_simulation_stop.c \
+					philo_gettime.c philo_simulation_and_print_status.c \
+					functions.c functions_sem.c \
+					philo_clean_all.c
 
 ifdef MAKE_BONUS
 SRCS			=	$(addprefix $(FOLDER_SEM), $(SRC_SEM))
