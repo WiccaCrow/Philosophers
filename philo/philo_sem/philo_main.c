@@ -31,7 +31,6 @@ int	main(int ac, char **av)
 		pthread_join(all.data.ph[i], NULL);
 	ft_sem_free(&all);
 	ft_clean_all(&all);
-	// usleep(3000000);
 	return (0);
 }
 

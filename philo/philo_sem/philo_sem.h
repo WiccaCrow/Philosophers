@@ -33,7 +33,7 @@ typedef struct s_ft_sem
 {
 	sem_t	*data;
 	int		sem_up;
-}				t_sem;//t_mutex
+}				t_sem;
 
 typedef struct s_data
 {
@@ -55,8 +55,6 @@ typedef struct s_philo
 {
 	int				id;
 	char			*print_color;
-	// int				nb_mutex_left_fork;
-	// int				nb_mutex_right_fork;
 	long int		eat_start_time;
 	int				eat_nb;
 	struct timeval	tv;
@@ -70,9 +68,9 @@ typedef struct s_all
 	pthread_t		sim_stop;
 }				t_all;
 
-void	ft_sem_down(t_sem *sem_forks);
-void	ft_sem_up(t_sem *sem_forks);
-void	ft_sem_free(t_all *all);
+void		ft_sem_down(t_sem *sem_forks);
+void		ft_sem_up(t_sem *sem_forks);
+void		ft_sem_free(t_all *all);
 
 long int	ft_atoi(const char *str);
 int			ft_strlen(const char *s);
