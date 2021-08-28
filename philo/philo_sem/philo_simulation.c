@@ -87,7 +87,7 @@ int	take_forks_eat_put_forks(t_philo *ph)
 }
 
 /********************************************
- * 		3.2.1.1. take_forks			*
+ * 		3.2.1.1. take_forks					*
  * ******************************************
 */
 /* Description:
@@ -95,25 +95,29 @@ int	take_forks_eat_put_forks(t_philo *ph)
  * 		take left forks. If philosopher can't take right fork, 
  * 		he throw left fork.
  * 
- * Return value:
- * 		1 - if philosopher can't take right fork.
- * 		0 - if philosopher can take right fork.
+ * Includes functions:
+ * 		3.2.1.1.1. ft_sem_down;
+ * 		3.2.1.1.2. ft_sem_up;
 */
 
 void	take_forks(t_philo *ph)
 {
+	sem_wait(ph->d->sem_take_both_forks);
 	while (!ph->d->sim_stop_int)
 	{
-		ft_sem_down(ph->d->sem_forks);
+		if (ph->d->sem_forks->sem_up > 1)
+			ft_sem_down(ph->d->sem_forks);
+		else
+			continue ;
 		if (ph->d->sem_forks->sem_up > 0)
 		{
 			ft_sem_down(ph->d->sem_forks);
 			break ;
 		}
-		// usleep(100);
-		// usleep(100 + ph->id/100);
-		ft_sem_up(ph->d->sem_forks);
+		else
+			ft_sem_up(ph->d->sem_forks);
 	}
+	sem_post(ph->d->sem_take_both_forks);
 }
 
 /********************************************
@@ -123,6 +127,10 @@ void	take_forks(t_philo *ph)
 /* Description:
  * 		The function simulates in philosophers life:
  * 		put both forks.
+ * Return value:
+ * 		Always 1.
+ * Includes functions:
+ * 		3.2.1.1.2. ft_sem_up;
 */
 
 int	put_forks(t_philo *ph)

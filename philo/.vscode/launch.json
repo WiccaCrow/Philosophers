@@ -6,7 +6,7 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/philo",
-      "args": ["2", "600", "200", "200"],
+      "args": ["5", "800", "200", "200"],
       "stopAtEntry": false,
       "cwd": "${fileDirname}",
       "environment": [],
@@ -26,8 +26,8 @@
       "name": "Launch",
       "program": "${workspaceFolder}/philo",
       "args": [
-        "12",
-        "600",
+        "5",
+        "800",
         "200",
         "200"
       ],

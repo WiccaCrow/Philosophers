@@ -9,7 +9,7 @@
  * 		2. initialization;
  * 		3. simulation;
  * 		4. simulation_stop;
- * 		5. ft_mutex_free;
+ * 		5. ft_sem_free;
  * 		6. ft_clean_all;
 */
 
@@ -31,6 +31,7 @@ int	main(int ac, char **av)
 		pthread_join(all.data.ph[i], NULL);
 	ft_sem_free(&all);
 	ft_clean_all(&all);
+	// usleep(3000000);
 	return (0);
 }
 

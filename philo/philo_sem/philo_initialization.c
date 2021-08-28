@@ -39,7 +39,7 @@ int	initialization(t_all *all, char **av)
  * 		the function returns 0, otherwise 1.
  * Includes functions:
  * 		2.1.1.	init_all_data_av;
- * 		2.1.2.	ft_mutex_init;
+ * 		2.1.2.	init_all_data_sem_0;
  * 		2.1.3.	init_all_data_colors;
 */
 
@@ -52,18 +52,8 @@ int	init_all_data(t_data *data, char **av)
 	data->ph = (pthread_t *)malloc(sizeof(pthread_t) * data->nb_philo);
 	if (!data->ph)
 		return (write(STDERR_FILENO, "Error: malloc error\n", 20));
-	data->sem_forks = (t_sem *)malloc(1 * sizeof(t_sem));
-	if (!data->sem_forks)
-		return (write(STDERR_FILENO, "Error:malloc\n", 13));
-	data->sem_forks->sem_up = 0;
-	data->sem_forks->data = sem_open(SEM_FORK, O_CREAT, 0600, data->nb_philo);
-	if (data->sem_forks->data == SEM_FAILED)
-		return (write(STDERR_FILENO, "Error:sem_open\n", 15));
-	data->sem_forks->sem_up = data->nb_philo;
-
-	data->sem_die = sem_open(SEM_DIE, O_CREAT, 0600, 1);
-	if (data->sem_die == SEM_FAILED)
-		return (write(STDERR_FILENO, "Error:sem_open\n", 15));
+	if (init_all_data_sem_0(data))
+		return (1);
 	if (init_all_data_colors(data))
 		return (write(STDERR_FILENO, "Error: malloc error\n", 20));
 	return (0);
@@ -93,6 +83,74 @@ int	init_all_data_av(t_data *data, char **av)
 		data->time_stop_eat = ft_atoi(av[5]);
 	if (data->nb_philo < 1)
 		return (write(STDERR_FILENO, "Error: no one philosopher\n", 26));
+	return (0);
+}
+
+/************************************
+ * 		2.1.2. init_all_data_sem_0	*
+ * **********************************
+*/
+/* Description:
+ * 		The function initializes semaphores. Part 1. SEM_DIE.
+ * 
+ * Returned value:
+ * 		In case of successful initialization, 
+ * 		the function returns 0, otherwise 1.
+ * Includes functions:
+ * 		2.1.2.1. init_all_data_sem_1;
+*/
+
+int	init_all_data_sem_0(t_data *data)
+{
+	sem_unlink(SEM_DIE);
+	data->sem_forks = (t_sem *)malloc(1 * sizeof(t_sem));
+	if (!data->sem_forks)
+		return (write(STDERR_FILENO, "Error:malloc\n", 15));
+	data->sem_die = sem_open(SEM_DIE, O_CREAT, 0600, 1);
+	if (data->sem_die == SEM_FAILED)
+	{
+		free(data->sem_forks);
+		return (write(STDERR_FILENO, "Error:sem_open\n", 16));
+	}
+	data->sem_forks->sem_up = data->nb_philo;
+	return (init_all_data_sem_1(data));
+}
+
+/****************************************
+ * 		2.1.2.1. init_all_data_sem_1	*
+ * **************************************
+*/
+/* Description:
+ * 		The function initializes semaphores. Part 2. SEM_FORK, SEM_BOTH_FORKS.
+ * 
+ * Returned value:
+ * 		In case of successful initialization, 
+ * 		the function returns 0, otherwise 1.
+*/
+
+int	init_all_data_sem_1(t_data *data)
+{
+	sem_unlink(SEM_FORK);
+	sem_unlink(SEM_BOTH_FORKS);
+	data->sem_forks->data = sem_open(SEM_FORK, O_CREAT, 0600, data->nb_philo);
+	if (data->sem_forks->data == SEM_FAILED)
+	{
+		free(data->sem_forks);
+		sem_close(data->sem_forks->data);
+		sem_unlink(SEM_FORK);
+		return (write(STDERR_FILENO, "Error:sem_open\n", 15));
+	}
+	data->sem_forks->sem_up = data->nb_philo;
+	data->sem_take_both_forks = sem_open(SEM_BOTH_FORKS, O_CREAT, 0600, 1);
+	if (data->sem_take_both_forks == SEM_FAILED)
+	{
+		free(data->sem_forks);
+		sem_close(data->sem_forks->data);
+		sem_unlink(SEM_FORK);
+		sem_close(data->sem_die);
+		sem_unlink(SEM_DIE);
+		return (write(STDERR_FILENO, "Error:sem_open\n", 15));
+	}
 	return (0);
 }
 

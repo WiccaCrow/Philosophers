@@ -27,6 +27,7 @@
 
 # define SEM_DIE "sem_die"
 # define SEM_FORK "sem_fork"
+# define SEM_BOTH_FORKS "sem_both_fork"
 
 typedef struct s_ft_sem
 {
@@ -39,6 +40,7 @@ typedef struct s_data
 	pthread_t		*ph;
 	sem_t			*sem_die;
 	t_sem			*sem_forks;
+	sem_t			*sem_take_both_forks;
 	int				nb_philo;
 	long int		time_to_die;
 	long int		time_to_eat;
@@ -88,6 +90,8 @@ int			valid_av(char *av);
 int			initialization(t_all *all, char **av);
 int			init_all_data(t_data *data, char **av);
 int			init_all_data_av(t_data *data, char **av);
+int			init_all_data_sem_0(t_data *data);
+int			init_all_data_sem_1(t_data *data);
 int			init_all_data_colors(t_data *data);
 int			init_all_philo(t_all *all, t_philo	**all_philo);
 

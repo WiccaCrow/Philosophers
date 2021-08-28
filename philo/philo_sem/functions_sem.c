@@ -1,25 +1,25 @@
 #include "philo_sem.h"
 
 /************************************
- * 		2.1.2.1. ft_mutex_lock		*
+ * 		3.2.1.1.1. ft_sem_down		*
  * **********************************
 */
 /* Description:
- * 		The function lock mutex (use for forks mutex).
+ * 		The function semaphore down.
 */
 
 void	ft_sem_down(t_sem *sem_forks)
 {
-	sem_wait(sem_forks->data);
 	--(sem_forks->sem_up);
+	sem_wait(sem_forks->data);
 }
 
 /************************************
- * 		2.1.2.2. ft_mutex_unlock	*
+ * 		3.2.1.1.2. ft_sem_up		*
  * **********************************
 */
 /* Description:
- * 		The function unlock mutex (use for forks mutex).
+ * 		The function semaphore up.
 */
 
 void	ft_sem_up(t_sem *sem_forks)
@@ -29,11 +29,11 @@ void	ft_sem_up(t_sem *sem_forks)
 }
 
 /************************************
- * 		 ft_mutex_init				*
+ * 		5. ft_sem_free				*
  * **********************************
 */
 /* Description:
- * 		The function destroy mutexes (use for forks mutex).
+ * 		The function close and unlink semaphore.
 */
 
 void	ft_sem_free(t_all *all)
@@ -42,4 +42,6 @@ void	ft_sem_free(t_all *all)
 	sem_unlink(SEM_FORK);
 	sem_close(all->data.sem_die);
 	sem_unlink(SEM_DIE);
+	sem_close(all->data.sem_take_both_forks);
+	sem_unlink(SEM_BOTH_FORKS);
 }
