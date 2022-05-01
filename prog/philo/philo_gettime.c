@@ -18,13 +18,14 @@ long int	ft_gettime_simul_start(void)
 	struct timeval	*tv;
 
 	tv = (struct timeval *)malloc(sizeof(struct timeval) * 1);
-	if (!gettimeofday(tv, NULL))
+	if (tv != NULL && !gettimeofday(tv, NULL))
 	{
 		timestap_in_mcs = tv->tv_sec * 1000000 + tv->tv_usec;
 		free(tv);
-		tv = NULL;
 		return (timestap_in_mcs);
 	}
+	if (tv != NULL)
+		free(tv);
 	write(STDERR_FILENO, "Error: gettimeofday error\n", 26);
 	return (-1);
 }
